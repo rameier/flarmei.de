@@ -3,80 +3,114 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { getCollection } from "astro:content";
+import FormattedDate from "../components/FormattedDate.astro";
+
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="de">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body>
     <Header />
     <main>
-      <h1>Willkommen auf flarmei.de</h1>
-      <p>
-        <strong>flarmei.de</strong> ist der persönliche Blog und die digitale Visitenkarte
-        von <strong>Ralf Meier</strong>. Die Website verbindet <strong
-          >Werdegang, Referenzen und fachliche Positionierung</strong
-        > mit einem inhaltlich vielseitigen Blog. Sie dient gleichermaßen als <strong
-          >Reflexionsraum</strong
-        >, <strong>Wissenssammlung</strong> und <strong
-          >professionelles Schaufenster</strong
-        >.
-      </p>
-      <p>
-        Der Blog richtet sich an Menschen, die sich für <strong
-          >Technologie, Organisation, persönliche Entwicklung und
-          Community-Arbeit</strong
-        > interessieren – insbesondere im Kontext von Softwareentwicklung, Product
-        Management und eSports.
-      </p>
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <span class="hero-eyebrow">Willkommen</span>
+        <h1 class="hero-headline">Technologie, Organisation &<br />Persönliche Entwicklung</h1>
+        <p class="hero-text">
+          Der persönliche Blog und die digitale Visitenkarte von Ralf Meier.
+          Ein Raum für Reflexion, Wissenssammlung und professionellen Austausch.
+        </p>
+        <div class="button-group">
+          <a href="/blog" class="btn btn-primary">Zum Blog</a>
+          <a href="/about" class="btn btn-secondary">Über mich</a>
+        </div>
+      </section>
 
-      <h2>Zweck & Anspruch</h2>
-      <ul>
-        <li>
-          <strong>Persönliche Einordnung:</strong> Darstellung des beruflichen und
-          ehrenamtlichen Werdegangs, der eigenen Haltung sowie der Themen, die mich
-          antreiben.
-        </li>
-        <li>
-          <strong>Gedanklicher Arbeitsraum:</strong> Der Blog ist kein Marketingkanal,
-          sondern ein Ort für Denken, Lernen, Reflektieren und Teilen – offen, ehrlich
-          und praxisnah.
-        </li>
-        <li>
-          <strong>Professionelle Referenz:</strong> Die Inhalte zeigen Erfahrung,
-          Haltung und Kompetenz in Technik, Produktarbeit und Vereinsorganisation.
-        </li>
-      </ul>
+      <!-- Topics Section -->
+      <section class="topics-section">
+        <h2 style="text-align: center;">Themenschwerpunkte</h2>
+        <div class="grid-container">
+          <div class="card">
+            <span class="card-icon">🎮</span>
+            <h3>eSports Management</h3>
+            <p>Strukturen, Ehrenamt, Organisation und Strategie im Vereinswesen.</p>
+          </div>
+          <div class="card">
+            <span class="card-icon">🌱</span>
+            <h3>Personalentwicklung</h3>
+            <p>Lernen im Job, Rollenwechsel und Feedback-Kultur.</p>
+          </div>
+          <div class="card">
+            <span class="card-icon">🧠</span>
+            <h3>Selbstführung</h3>
+            <p>Motivation, Prioritäten und Routinen für den Alltag.</p>
+          </div>
+          <div class="card">
+            <span class="card-icon">💻</span>
+            <h3>Softwareentwicklung</h3>
+            <p>Frontend-Engineering, Tooling und Developer Experience.</p>
+          </div>
+          <div class="card">
+            <span class="card-icon">🤖</span>
+            <h3>Künstliche Intelligenz</h3>
+            <p>Einsatz von KI im Alltag und in der Softwareentwicklung.</p>
+          </div>
+          <div class="card">
+            <span class="card-icon">🎨</span>
+            <h3>Product Management</h3>
+            <p>Produktdenken, Nutzerzentrierung und Organisation.</p>
+          </div>
+        </div>
+      </section>
 
-      <h2>Themenschwerpunkte</h2>
-      <ul>
-        <li>
-          <strong>eSports-Vereinsmanagement:</strong> Strukturen, Ehrenamt, Organisation,
-          Strategie.
-        </li>
-        <li>
-          <strong>Personalentwicklung:</strong> Lernen im Job, Rollenwechsel, Feedback-Kultur.
-        </li>
-        <li>
-          <strong>Selbstführung & Reflexion:</strong> Motivation, Prioritäten, Routinen.
-        </li>
-        <li>
-          <strong>Softwareentwicklung:</strong> Frontend-Engineering, Tooling, Developer
-          Experience.
-        </li>
-        <li>
-          <strong>Künstliche Intelligenz:</strong> Einsatz von KI im Alltag und in
-          der Softwareentwicklung.
-        </li>
-        <li>
-          <strong>Product Management & Product Design:</strong> Produktdenken, Nutzerzentrierung,
-          Organisation.
-        </li>
-      </ul>
+      <!-- Blog Overview Section -->
+      <section class="blog-section">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2rem;">
+            <h2>Neueste Artikel</h2>
+            <a href="/blog">Alle Artikel ansehen &rarr;</a>
+        </div>
+        <div class="blog-grid">
+          {
+            posts.map((post) => (
+              <a href={`/blog/${post.slug}/`} class="blog-card">
+                <h3>{post.data.title}</h3>
+                <div class="date">
+                  <FormattedDate date={post.data.pubDate} />
+                </div>
+                <p>{post.data.description}</p>
+              </a>
+            ))
+          }
+        </div>
+      </section>
 
-      <p>Viel Spaß beim Lesen und Entdecken!</p>
+      <!-- About Section -->
+      <section class="about-section">
+        <div class="about-image-placeholder">
+            RM
+        </div>
+        <div>
+            <h2>Über mich</h2>
+            <p>
+                <strong>flarmei.de</strong> ist mehr als nur ein Blog. Es ist mein digitaler Garten, 
+                in dem ich Gedanken zu Technologie, Management und persönlichem Wachstum kultiviere.
+            </p>
+            <p>
+                Dieser Ort dient als Reflexionsraum und Wissenssammlung. Hier teile ich meine 
+                Erfahrungen aus der Softwareentwicklung, dem Produktmanagement und meiner 
+                ehrenamtlichen Arbeit im eSports.
+            </p>
+            <a href="/about" class="btn btn-secondary" style="margin-top: 1rem;">Mehr erfahren</a>
+        </div>
+      </section>
+
     </main>
     <Footer />
   </body>

@@ -3,13 +3,76 @@ const today = new Date();
 ---
 
 <footer>
-  &copy; {today.getFullYear()} Ralf Meier. All rights reserved.
+  <div class="footer-content">
+    <div class="footer-column">
+      <h3>flarmei.de</h3>
+      <p>Der persönliche Blog von Ralf Meier. Technologie, Organisation & Entwicklung.</p>
+    </div>
+    <div class="footer-column">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </div>
+    <div class="footer-column">
+      <h3>Connect</h3>
+      <div class="social-links">
+        <a href="https://github.com/flarmei" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://linkedin.com/in/ralf-meier" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="/rss.xml">RSS</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; {today.getFullYear()} Ralf Meier. All rights reserved.
+  </div>
 </footer>
 <style>
   footer {
-    padding: 2em 1em 6em 1em;
-    background: linear-gradient(var(--gray-gradient)) no-repeat;
-    color: rgb(var(--gray));
+    padding: 4em 2em 2em;
+    background: rgb(var(--gray-light));
+    color: rgb(var(--gray-dark));
+    margin-top: 4rem;
+  }
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  .footer-column h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--black);
+  }
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-column ul li {
+    margin-bottom: 0.5rem;
+  }
+  .footer-column a {
+    color: rgb(var(--gray-dark));
+    text-decoration: none;
+  }
+  .footer-column a:hover {
+    color: var(--accent);
+  }
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+  .footer-bottom {
     text-align: center;
+    padding-top: 2rem;
+    font-size: 0.9rem;
+    color: rgb(var(--gray));
   }
 </style>
