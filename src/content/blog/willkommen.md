@@ -2,7 +2,6 @@
 title: "Willkommen auf flarmei.de"
 description: "Der Startschuss für meinen persönlichen Blog."
 pubDate: "Jan 01 2026"
-heroImage: "../../assets/blog-placeholder-1.jpg"
 tags: ["Allgemein", "Intro"]
 ---
 

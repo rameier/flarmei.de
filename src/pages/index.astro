@@ -5,6 +5,8 @@ import Header from "../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import { getCollection } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
+import { Image } from "astro:assets";
+import profileImage from "../assets/flarmeiLogo.png";
 
 const posts = (await getCollection("blog"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -201,7 +203,12 @@ const posts = (await getCollection("blog"))
 
       <!-- About Section -->
       <section class="about-section">
-        <div class="about-image-placeholder">RM</div>
+        <Image
+          src={profileImage}
+          alt="Portrait von Ralf Meier"
+          width={375}
+          height={375}
+        />
         <div>
           <h2>Über mich</h2>
           <p>
