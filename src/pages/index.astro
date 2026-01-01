@@ -22,10 +22,12 @@ const posts = (await getCollection("blog"))
       <!-- Hero Section -->
       <section class="hero-section">
         <span class="hero-eyebrow">Willkommen</span>
-        <h1 class="hero-headline">Technologie, Organisation &<br />Persönliche Entwicklung</h1>
+        <h1 class="hero-headline">
+          Technologie, Organisation &<br />Persönliche Entwicklung
+        </h1>
         <p class="hero-text">
-          Der persönliche Blog und die digitale Visitenkarte von Ralf Meier.
-          Ein Raum für Reflexion, Wissenssammlung und professionellen Austausch.
+          Der persönliche Blog und die digitale Visitenkarte von Ralf Meier. Ein
+          Raum für Reflexion, Wissenssammlung und professionellen Austausch.
         </p>
         <div class="button-group">
           <a href="/blog" class="btn btn-primary">Zum Blog</a>
@@ -40,7 +42,9 @@ const posts = (await getCollection("blog"))
           <div class="card">
             <span class="card-icon">🎮</span>
             <h3>eSports Management</h3>
-            <p>Strukturen, Ehrenamt, Organisation und Strategie im Vereinswesen.</p>
+            <p>
+              Strukturen, Ehrenamt, Organisation und Strategie im Vereinswesen.
+            </p>
           </div>
           <div class="card">
             <span class="card-icon">🌱</span>
@@ -72,9 +76,11 @@ const posts = (await getCollection("blog"))
 
       <!-- Blog Overview Section -->
       <section class="blog-section">
-        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2rem;">
-            <h2>Neueste Artikel</h2>
-            <a href="/blog">Alle Artikel ansehen &rarr;</a>
+        <div
+          style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2rem;"
+        >
+          <h2>Neueste Artikel</h2>
+          <a href="/blog">Alle Artikel ansehen &rarr;</a>
         </div>
         <div class="blog-grid">
           {
@@ -93,24 +99,24 @@ const posts = (await getCollection("blog"))
 
       <!-- About Section -->
       <section class="about-section">
-        <div class="about-image-placeholder">
-            RM
-        </div>
+        <div class="about-image-placeholder">RM</div>
         <div>
-            <h2>Über mich</h2>
-            <p>
-                <strong>flarmei.de</strong> ist mehr als nur ein Blog. Es ist mein digitaler Garten, 
-                in dem ich Gedanken zu Technologie, Management und persönlichem Wachstum kultiviere.
-            </p>
-            <p>
-                Dieser Ort dient als Reflexionsraum und Wissenssammlung. Hier teile ich meine 
-                Erfahrungen aus der Softwareentwicklung, dem Produktmanagement und meiner 
-                ehrenamtlichen Arbeit im eSports.
-            </p>
-            <a href="/about" class="btn btn-secondary" style="margin-top: 1rem;">Mehr erfahren</a>
+          <h2>Über mich</h2>
+          <p>
+            <strong>flarmei.de</strong> ist mehr als nur ein Blog. Es ist mein digitaler
+            Garten, in dem ich Gedanken zu Technologie, Management und persönlichem
+            Wachstum kultiviere.
+          </p>
+          <p>
+            Dieser Ort dient als Reflexionsraum und Wissenssammlung. Hier teile
+            ich meine Erfahrungen aus der Softwareentwicklung, dem
+            Produktmanagement und meiner ehrenamtlichen Arbeit im eSports.
+          </p>
+          <a href="/about" class="btn btn-secondary" style="margin-top: 1rem;"
+            >Mehr erfahren</a
+          >
         </div>
       </section>
-
     </main>
     <Footer />
   </body>
