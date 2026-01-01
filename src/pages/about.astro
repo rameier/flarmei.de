@@ -1,202 +1,414 @@
 ---
-import Layout from "../layouts/BlogPost.astro";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const SITE_TITLE = "Über mich | Ralf Meier";
+const SITE_DESCRIPTION = "Werdegang, Werte und Referenzen von Ralf Meier";
 ---
 
-<Layout
-  title="Über mich"
-  description="Werdegang und Referenzen von Ralf Meier"
-  pubDate={new Date("January 01 2026")}
->
-  <h2>Kurzprofil</h2>
-  <p>
-    Technikbegeisterter Softwareentwickler mit Fokus auf moderne
-    Webtechnologien, CPQ-Systeme und Produktentwicklung.<br />
-    Verbindet Softwareentwicklung und Design mit starkem ehrenamtlichem Engagement
-    im eSports-Bereich.<br />
-    Schwerpunkte: saubere Strukturen, transparente Kommunikation, Community-Aufbau
-    und nachhaltige Organisationsentwicklung.
-  </p>
+<!doctype html>
+<html lang="de">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      /* Sektionen allgemein */
+      section {
+        padding: 4rem 0;
+        margin-bottom: 2rem;
+      }
 
-  <hr />
+      /* 3. Intro-/Profil-Sektion */
+      .intro-section {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        align-items: center;
+      }
 
-  <h2>Berufserfahrung</h2>
+      @media (min-width: 768px) {
+        .intro-section {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
 
-  <h3>Softwareentwickler</h3>
-  <p>
-    <strong>encoway GmbH</strong> · Bremen<br />
-    <em>Februar 2022 – heute</em>
-  </p>
-  <ul>
-    <li>
-      Mitwirkung an Konzeption und Umsetzung einer neuen
-      React/TypeScript-basierten UI im Rahmen der Produktentwicklung für
-      CPQ-Software
-    </li>
-    <li>Entwicklung und Pflege von CPQ-Lösungen</li>
-    <li>Enge Zusammenarbeit mit Produkt-, Design- und Projektteams</li>
-  </ul>
-  <p>
-    <strong>Technologien & Schwerpunkte:</strong><br />
-    TypeScript · React · Java · Spring Boot · Maven · CPQ Software · Vertriebsprozesse
-  </p>
+      .profile-image-placeholder {
+        background-color: var(--gray-light);
+        aspect-ratio: 1 / 1;
+        border-radius: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        font-family: "Georgia", serif;
+        color: var(--gray);
+      }
 
-  <h3>Werkstudent Softwareentwicklung</h3>
-  <p>
-    <strong>newport it GmbH & Co. KG</strong> · Bremen<br />
-    <em>Dezember 2019 – November 2021</em>
-  </p>
-  <ul>
-    <li>Support und Weiterentwicklung einer Mobile-News-App in ReactJS</li>
-    <li>Pflege und Erweiterung von WordPress-Websites und Plugins</li>
-    <li>Entwicklung in PHP</li>
-  </ul>
-  <p>
-    <strong>Technologien:</strong><br />
-    ReactJS · PHP · WordPress
-  </p>
+      .intro-content .eyebrow {
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.1em;
+        color: var(--gray);
+        margin-bottom: 1rem;
+        display: block;
+        font-family: "Atkinson", sans-serif;
+        font-weight: 700;
+      }
 
-  <h3>Studentischer Tutor</h3>
-  <p>
-    <strong>Universität Bremen</strong><br />
-    <em>Oktober 2018 – März 2019</em>
-  </p>
-  <ul>
-    <li>Tutor im Modul <em>Praktische Informatik 1b</em></li>
-    <li>
-      Unterstützung von Studierenden bei Übungsaufgaben und Grundlagen der
-      Programmierung
-    </li>
-  </ul>
+      .intro-content h1 {
+        margin-bottom: 1.5rem;
+      }
 
-  <h3>Werkstudent Software Development</h3>
-  <p>
-    <strong>encoway GmbH</strong> · Bremen<br />
-    <em>April 2017 – September 2017</em>
-  </p>
-  <ul>
-    <li>Mitarbeit im Bereich Softwareentwicklung</li>
-    <li>
-      Erste praktische Erfahrungen in professionellen Entwicklungsprozessen
-    </li>
-  </ul>
+      /* 4. Textlastige Abschnitts-Sektion („Mein Weg“) */
+      .text-section {
+        max-width: 65ch;
+        margin: 0 auto;
+        text-align: left;
+      }
 
-  <hr />
+      .text-section h2 {
+        margin-bottom: 2rem;
+      }
 
-  <h2>Ehrenamt</h2>
+      .text-section p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+        color: var(--gray-dark);
+      }
 
-  <h3>Stellvertretender Vorstandsvorsitzender</h3>
-  <p>
-    <strong>Bremen eSports e.V.</strong><br />
-    <em>Februar 2025 – heute</em>
-  </p>
-  <ul>
-    <li>Strategische und organisatorische Mitverantwortung für den Verein</li>
-    <li>Weiterentwicklung der Vereinsstrukturen und -vision</li>
-  </ul>
+      /* 5. Zeitstrahl-/Stationen-Sektion */
+      .timeline-section {
+        max-width: 800px;
+        margin: 0 auto;
+      }
 
-  <h3>Berater / Organisationsmitglied</h3>
-  <p>
-    <strong>Bremen eSports e.V.</strong><br />
-    <em>Mai 2023 – heute</em>
-  </p>
-  <ul>
-    <li>Arbeitsgruppe Sponsoring & Förderung</li>
-    <li>Arbeitsgruppe League of Legends Community</li>
-  </ul>
+      .timeline-section h2 {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
 
-  <h3>Vorstandsmitglied Jugendwart</h3>
-  <p>
-    <strong>Bremen eSports e.V.</strong><br />
-    <em>März 2021 – April 2023</em>
-  </p>
+      .timeline {
+        position: relative;
+        padding-left: 2rem;
+        border-left: 2px solid var(--gray-light);
+      }
 
-  <h3>Leiter des Hochschulbereichs</h3>
-  <p>
-    <strong>Bremen eSports e.V.</strong><br />
-    <em>Mai 2020 – April 2023</em>
-  </p>
-  <ul>
-    <li>Verwaltung der sozialen Kanäle des Hochschulbereichs</li>
-    <li>Organisation von Liga- und Turnierübertragungen auf Twitch</li>
-    <li>Mitgliederakquise und Vermarktung</li>
-    <li>Verwaltung der Kommunikationswege (insb. Discord)</li>
-    <li>Teammanagement</li>
-  </ul>
+      .timeline-item {
+        position: relative;
+        margin-bottom: 3rem;
+      }
 
-  <hr />
+      .timeline-marker {
+        position: absolute;
+        left: -2.6rem; /* Adjust based on padding and border width */
+        top: 0.5rem;
+        width: 1rem;
+        height: 1rem;
+        background-color: var(--accent);
+        border-radius: 50%;
+        border: 4px solid var(--background-warm);
+      }
 
-  <h2>Hochschulisches & Gremienarbeit</h2>
+      .timeline-content h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.25rem;
+      }
 
-  <h3>Mitglied</h3>
-  <p>
-    <strong>Studiengangs-Ausschuss Wirtschaftsinformatik</strong><br />
-    <em>Oktober 2016 – Juni 2021</em>
-  </p>
-  <ul>
-    <li>
-      Ansprechpartner für Studierende bei organisatorischen und
-      prüfungsbezogenen Themen
-    </li>
-    <li>Mitarbeit bei der Organisation von Veranstaltungen</li>
-    <li>Vermittlung zwischen Lehrenden und Studierenden</li>
-  </ul>
+      .timeline-meta {
+        font-size: 0.9rem;
+        color: var(--gray);
+        margin-bottom: 1rem;
+        display: block;
+        font-family: "Atkinson", sans-serif;
+      }
 
-  <h3>Studentische Vertretung</h3>
-  <p>
-    <strong
-      >Gemeinsam beschließender Ausschuss & Prüfungsausschuss
-      Wirtschaftsinformatik</strong
-    ><br />
-    <em>Oktober 2016 – Juni 2021</em>
-  </p>
+      .timeline-content ul {
+        margin: 0;
+        padding-left: 1.2rem;
+        color: var(--gray-dark);
+      }
 
-  <hr />
+      .timeline-content p {
+        margin-bottom: 0.5rem;
+      }
 
-  <h2>Ausbildung</h2>
+      /* 6. Werte-/Motivations-Sektion */
+      .values-section {
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 24px;
+        padding: 4rem 2rem;
+      }
 
-  <h3>Bachelor of Science – Wirtschaftsinformatik</h3>
-  <p>
-    <strong>Universität Bremen</strong><br />
-    <em>2016 – 2022</em>
-  </p>
-  <ul>
-    <li>Schwerpunkt: Gründungsmanagement & E-Business</li>
-  </ul>
+      .values-section h2 {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
 
-  <h3>Allgemeine Hochschulreife (Informationstechnologie)</h3>
-  <p>
-    <strong>Technisches Bildungszentrum Mitte Bremen</strong><br />
-    <em>2013 – 2016</em>
-  </p>
-  <ul>
-    <li>Leistungskurse: Informationstechnik und Mathematik</li>
-  </ul>
+      .values-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
 
-  <hr />
+      @media (min-width: 768px) {
+        .values-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
 
-  <h2>Kenntnisse</h2>
+      .value-card {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease;
+      }
 
-  <h3>Programmiersprachen & Technologien</h3>
-  <p>TypeScript, JavaScript, Java, React, Spring Boot, Maven, CSS, PHP</p>
+      .value-card:hover {
+        transform: translateY(-4px);
+      }
 
-  <h3>Web & Software</h3>
-  <p>
-    Frontend-Entwicklung, Backend-Entwicklung, Web-Entwicklung, CPQ Software,
-    WordPress
-  </p>
+      .value-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        display: block;
+        color: var(--accent);
+      }
 
-  <h3>Organisation & Management</h3>
-  <p>
-    Vertriebsprozesse, Eventplanung, eSport-Management, Öffentlichkeitsarbeit /
-    PR, Soziale Medien, Live-Video-Streaming, Frontend-Design
-  </p>
+      .value-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+      }
 
-  <hr />
+      .value-card p {
+        font-size: 0.95rem;
+        color: var(--gray-dark);
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <!-- 3. Intro-/Profil-Sektion -->
+      <section class="intro-section">
+        <div class="profile-image-placeholder">
+          <span>RM</span>
+        </div>
+        <div class="intro-content">
+          <span class="eyebrow">Softwareentwickler & Organisator</span>
+          <h1>Ralf Meier</h1>
+          <p>
+            Technikbegeisterter Softwareentwickler mit Fokus auf moderne
+            Webtechnologien, CPQ-Systeme und Produktentwicklung. Ich verbinde
+            technische Expertise mit einem Auge für Design und einem starken
+            Engagement für Community und Organisation.
+          </p>
+        </div>
+      </section>
 
-  <h2>Sprachen</h2>
-  <ul>
-    <li>Deutsch – Muttersprache</li>
-    <li>Englisch – fließend</li>
-    <li>Französisch - Grundkenntnisse</li>
-  </ul>
-</Layout>
+      <!-- 4. Textlastige Abschnitts-Sektion („Mein Weg“) -->
+      <section class="text-section">
+        <h2>Mein Weg</h2>
+        <p>
+          Mein Weg in die IT begann mit einer Faszination für das, was möglich
+          ist, wenn Code auf Kreativität trifft. Über die Jahre habe ich mich
+          nicht nur auf die reine Entwicklung konzentriert, sondern auch darauf,
+          wie Softwareteams effizient zusammenarbeiten und wie Produkte
+          nachhaltig entwickelt werden können.
+        </p>
+        <p>
+          Neben meiner beruflichen Tätigkeit bei der encoway GmbH engagiere ich
+          mich leidenschaftlich im eSports-Bereich. Als stellvertretender
+          Vorstandsvorsitzender des Bremen eSports e.V. arbeite ich daran,
+          Strukturen zu schaffen, die Menschen verbinden und fördern.
+        </p>
+      </section>
+
+      <!-- 5. Zeitstrahl-/Stationen-Sektion -->
+      <section class="timeline-section">
+        <h2>Berufserfahrung</h2>
+        <div class="timeline">
+          <!-- Item 3 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3>Softwareentwickler</h3>
+              <span class="timeline-meta"
+                >encoway GmbH · Februar 2022 – heute</span
+              >
+              <p>Technologien: TypeScript, React, Java, Spring Boot, CPQ</p>
+              <ul>
+                <li>
+                  Konzeption und Umsetzung neuer React/TypeScript-basierter UIs
+                </li>
+                <li>Entwicklung und Pflege von CPQ-Lösungen</li>
+                <li>
+                  Enge Zusammenarbeit mit Produkt-, Design- und Projektteams
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3>Werkstudent Softwareentwicklung</h3>
+              <span class="timeline-meta"
+                >newport it GmbH & Co. KG · Dezember 2019 – November 2021</span
+              >
+              <p>Technologien: ReactJS, PHP, WordPress</p>
+              <ul>
+                <li>Support und Weiterentwicklung einer Mobile-News-App</li>
+                <li>Pflege und Erweiterung von WordPress-Websites</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3>Studentischer Tutor</h3>
+              <span class="timeline-meta"
+                >Universität Bremen · Oktober 2018 – März 2019</span
+              >
+              <ul>
+                <li>Tutor im Modul "Praktische Informatik 1b"</li>
+                <li>Unterstützung von Studierenden bei Übungsaufgaben</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3>Werkstudent Software Development</h3>
+              <span class="timeline-meta"
+                >encoway GmbH · April 2017 – September 2017</span
+              >
+              <ul>
+                <li>Mitarbeit im Bereich Softwareentwicklung</li>
+                <li>
+                  Erste praktische Erfahrungen in professionellen Prozessen
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ehrenamt Sektion -->
+      <section class="timeline-section">
+        <h2>Ehrenamt</h2>
+        <div class="timeline">
+          <!-- Item 1 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3>Stellvertretender Vorstandsvorsitzender</h3>
+              <span class="timeline-meta"
+                >Bremen eSports e.V. · Februar 2025 – heute</span
+              >
+              <ul>
+                <li>
+                  Strategische und organisatorische Mitverantwortung für den
+                  Verein
+                </li>
+                <li>Weiterentwicklung der Vereinsstrukturen und -vision</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3>Berater / Organisationsmitglied</h3>
+              <span class="timeline-meta"
+                >Bremen eSports e.V. · Mai 2023 – heute</span
+              >
+              <ul>
+                <li>Unterstützung bei Events und organisatorischen Aufgaben</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3>Vorstandsmitglied Jugendwart</h3>
+              <span class="timeline-meta"
+                >Bremen eSports e.V. · März 2021 – April 2023</span
+              >
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3>Leiter des Hochschulbereichs</h3>
+              <span class="timeline-meta"
+                >Bremen eSports e.V. · Mai 2020 – April 2023</span
+              >
+              <ul>
+                <li>Verwaltung der sozialen Kanäle des Hochschulbereichs</li>
+                <li>
+                  Organisation von Liga- und Turnierübertragungen auf Twitch
+                </li>
+                <li>Mitgliederakquise und Vermarktung</li>
+                <li>Verwaltung der Kommunikationswege (insb. Discord)</li>
+                <li>Teammanagement</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Werte-/Motivations-Sektion -->
+      <section class="values-section">
+        <h2>Werte & Fokus</h2>
+        <div class="values-grid">
+          <div class="value-card">
+            <span class="value-icon">📐</span>
+            <h3>Saubere Strukturen</h3>
+            <p>
+              Ob im Code oder in der Organisation: Klare Strukturen sind das
+              Fundament für Skalierbarkeit und Wartbarkeit.
+            </p>
+          </div>
+          <div class="value-card">
+            <span class="value-icon">💬</span>
+            <h3>Transparente Kommunikation</h3>
+            <p>
+              Offenheit schafft Vertrauen. Ich setze auf direkte und ehrliche
+              Kommunikation im Team und mit Stakeholdern.
+            </p>
+          </div>
+          <div class="value-card">
+            <span class="value-icon">🤝</span>
+            <h3>Community-Aufbau</h3>
+            <p>
+              Menschen zusammenbringen und gemeinsame Ziele verfolgen – das
+              treibt mich an, besonders im ehrenamtlichen Bereich.
+            </p>
+          </div>
+          <div class="value-card">
+            <span class="value-icon">🌱</span>
+            <h3>Nachhaltige Entwicklung</h3>
+            <p>
+              Lösungen sollten nicht nur heute funktionieren, sondern auch
+              morgen noch Bestand haben.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
