@@ -1,27 +1,31 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { getCollection } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import { categories } from "../content/meta/categories";
+import type { Post } from "../lib/posts";
 
-type Props = CollectionEntry<"blog">["data"];
+type Props = CollectionEntry<"posts">["data"] & {
+  relatedPosts?: Post[];
+};
 
-const { title, description, pubDate, updatedDate, heroImage, tags } =
-  Astro.props;
-
-const allPosts = await getCollection("blog");
-// Filter out current post by title (heuristic) and sort by date
-const morePosts = allPosts
-  .filter((post) => post.data.title !== title)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+const {
+  title,
+  excerpt,
+  date,
+  updated,
+  coverImage,
+  tags,
+  category,
+  relatedPosts = [],
+} = Astro.props;
 ---
 
 <html lang="de">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={excerpt} />
     <style>
       /* 1. Global Layout */
       main {
@@ -233,15 +237,15 @@ const morePosts = allPosts
 
         <!-- 4. Article Header -->
         <header class="article-header">
-          {tags && tags.length > 0 && <span class="badge">{tags[0]}</span>}
+          <span class="badge">{categories[category]}</span>
           <h1 class="title">{title}</h1>
-          {description && <p class="intro">{description}</p>}
+          {excerpt && <p class="intro">{excerpt}</p>}
           <div class="meta">
-            <FormattedDate date={pubDate} />
+            <FormattedDate date={date} />
             {
-              updatedDate && (
+              updated && (
                 <span>
-                  (Aktualisiert: <FormattedDate date={updatedDate} />)
+                  (Aktualisiert: <FormattedDate date={updated} />)
                 </span>
               )
             }
@@ -266,15 +270,18 @@ const morePosts = allPosts
 
       <!-- 7. More Articles -->
       {
-        morePosts.length > 0 && (
+        relatedPosts.length > 0 && (
           <section class="more-articles">
             <h2>Weitere Artikel</h2>
             <div class="articles-grid">
-              {morePosts.map((post) => (
-                <a href={`/blog/${post.id}/`} class="article-card">
-                  {post.data.tags && post.data.tags.length > 0 && (
-                    <span class="card-badge">{post.data.tags[0]}</span>
-                  )}
+              {relatedPosts.map((post) => (
+                <a
+                  href={`/blog/${post.data.slug || post.id}/`}
+                  class="article-card"
+                >
+                  <span class="card-badge">
+                    {categories[post.data.category]}
+                  </span>
                   <h3 class="card-title">{post.data.title}</h3>
                 </a>
               ))}

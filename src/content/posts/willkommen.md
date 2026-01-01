@@ -1,7 +1,10 @@
 ---
 title: "Willkommen auf flarmei.de"
-description: "Der Startschuss für meinen persönlichen Blog."
-pubDate: "Jan 01 2026"
+slug: "willkommen"
+date: "2026-01-01"
+category: "meta"
+excerpt: "Der Startschuss für meinen persönlichen Blog."
+draft: false
 tags: ["Allgemein", "Intro"]
 ---
 
@@ -17,8 +20,3 @@ Wie auf der Startseite bereits angekündigt, wird es hier um eine bunte Mischung
 - **Softwareentwicklung**: Technische Deep-Dives, Erfahrungen mit Tools und Frameworks.
 - **Personalentwicklung & Selbstführung**: Gedanken zu Lernen, Wachstum und Organisation.
 - **Product Management**: Wie wir bessere Produkte bauen.
-
-Ich freue mich darauf, meine Gedanken mit euch zu teilen und bin gespannt auf den Austausch!
-
-Viele Grüße,
-Ralf
