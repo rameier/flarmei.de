@@ -3,13 +3,22 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
-import { getSortedPosts } from "../lib/posts";
+import { getSortedPosts, type Post } from "../lib/posts";
 import FormattedDate from "../components/FormattedDate.astro";
 import { Image } from "astro:assets";
 import profileImage from "../assets/flarmeiLogo.png";
 import { categories } from "../content/meta/categories";
 
-const posts = (await getSortedPosts()).slice(0, 3);
+const allPosts = await getSortedPosts();
+const featuredPost = allPosts[0];
+const latestPosts = allPosts.slice(1, 7);
+
+const WORDS_PER_MINUTE = 200;
+function getReadingTimeMinutes(post: Post) {
+  const body = (post as unknown as { body?: string }).body ?? "";
+  const words = body.trim() ? body.trim().split(/\s+/).length : 0;
+  return Math.max(1, Math.round(words / WORDS_PER_MINUTE));
+}
 ---
 
 <!doctype html>
@@ -22,210 +31,213 @@ const posts = (await getSortedPosts()).slice(0, 3);
     <main>
       <!-- Hero Section -->
       <section class="hero-section">
-        <span class="hero-eyebrow">Willkommen</span>
-        <h1 class="hero-headline">
-          Technologie, Organisation &<br />Persönliche Entwicklung
-        </h1>
-        <p class="hero-text">
-          Der persönliche Blog und die digitale Visitenkarte von Ralf Meier. Ein
-          Raum für Reflexion, Wissenssammlung und professionellen Austausch.
-        </p>
-        <div class="button-group">
-          <a href="/blog" class="btn btn-primary">Zum Blog</a>
-          <a href="/about" class="btn btn-secondary">Über mich</a>
+        <div class="hero-main">
+            <h1 class="hero-headline">Systeme, Menschen &amp; Schnittstellen</h1>
+            <p class="hero-text">
+            Dieser Blog ist ein Ort für Gedanken aus realen Systemen: aus
+            Softwareentwicklung, Produktarbeit und ehrenamtlicher
+            Organisationsarbeit.
+            </p>
+            <p class="hero-text">
+            Ich schreibe über das, was zwischen den Rollen passiert – zwischen
+            Code und Menschen, zwischen Struktur und Alltag, zwischen Anspruch
+            und Realität.
+            </p>
+            <p class="hero-text">
+            Nicht um Antworten vorzugeben, sondern um Zusammenhänge sichtbar zu
+            machen.
+            </p>
+          <div class="button-group">
+            <a href="#artikel" class="btn btn-primary">Neueste Artikel</a>
+          </div>
         </div>
+
+        <aside class="hero-meta" aria-label="Themenschwerpunkte">
+          <p class="hero-meta-title">Schwerpunkte</p>
+          <ul class="hero-tags">
+            <li>
+              <a href="/kategorie/produkt-software">Software &amp; Produkt</a>
+            </li>
+            <li>
+              <a href="/kategorie/ehrenamt-gemeinschaft"
+                >eSports &amp; Ehrenamt</a
+              >
+            </li>
+            <li>
+              <a href="/kategorie/selbstfuehrung-reflexion">Selbstführung</a>
+            </li>
+            <li><a href="#schnittstellen">Schnittstellen</a></li>
+          </ul>
+        </aside>
       </section>
 
       <!-- Topics Section -->
       <section class="topics-section">
-        <h2 style="text-align: center;">Themenschwerpunkte</h2>
-        <div class="grid-container">
-          <div class="card">
-            <span class="card-icon">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <line x1="6" y1="11" x2="10" y2="11"></line>
-                <line x1="8" y1="9" x2="8" y2="13"></line>
-                <line x1="15" y1="12" x2="15.01" y2="12"></line>
-                <line x1="18" y1="10" x2="18.01" y2="10"></line>
-                <path
-                  d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"
-                ></path>
-              </svg>
-            </span>
-            <h3>eSports Management</h3>
+        <h2 class="section-title">Themen</h2>
+        <div class="grid-container topics-grid">
+          <a class="topic-card" href="/kategorie/systeme-struktur">
+            <h3>Produkt &amp; Organisation</h3>
             <p>
-              Strukturen, Ehrenamt, Organisation und Strategie im Vereinswesen.
+              Wie Produktdenken im Alltag funktioniert – und wo es an Realität
+              scheitert.
             </p>
-          </div>
-          <div class="card">
-            <span class="card-icon">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
-                ></path>
-                <path d="M12 16v-4"></path>
-                <path d="M12 8h.01"></path>
-                <path d="M8 12h8"></path>
-              </svg>
-            </span>
-            <h3>Personalentwicklung</h3>
-            <p>Lernen im Job, Rollenwechsel und Feedback-Kultur.</p>
-          </div>
-          <div class="card">
-            <span class="card-icon">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"
-                ></path>
-                <path
-                  d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"
-                ></path>
-              </svg>
-            </span>
-            <h3>Selbstführung</h3>
-            <p>Motivation, Prioritäten und Routinen für den Alltag.</p>
-          </div>
-          <div class="card">
-            <span class="card-icon">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="16 18 22 12 16 6"></polyline>
-                <polyline points="8 6 2 12 8 18"></polyline>
-              </svg>
-            </span>
-            <h3>Softwareentwicklung</h3>
-            <p>Frontend-Engineering, Tooling und Developer Experience.</p>
-          </div>
-          <div class="card">
-            <span class="card-icon">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="3" y="11" width="18" height="10" rx="2"></rect>
-                <circle cx="12" cy="5" r="2"></circle>
-                <path d="M12 7v4"></path>
-                <line x1="8" y1="16" x2="8.01" y2="16"></line>
-                <line x1="16" y1="16" x2="16.01" y2="16"></line>
-              </svg>
-            </span>
-            <h3>Künstliche Intelligenz</h3>
-            <p>Einsatz von KI im Alltag und in der Softwareentwicklung.</p>
-          </div>
-          <div class="card">
-            <span class="card-icon">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-                <path d="M9 17c2 0 2.8-1 2.8-2.8V10c0-2 1-3.3 2.8-3.3h1.8"
-                ></path>
-                <path d="M9 7h6"></path>
-              </svg>
-            </span>
-            <h3>Product Management</h3>
-            <p>Produktdenken, Nutzerzentrierung und Organisation.</p>
-          </div>
+            <div class="topic-tags">
+              Produktarbeit · Prozesse · Zusammenarbeit
+            </div>
+          </a>
+          <a class="topic-card" href="/kategorie/ehrenamt-gemeinschaft">
+            <h3>eSports &amp; Ehrenamt</h3>
+            <p>
+              Einblicke in Vereinsarbeit, Gemeinschaftsaufbau und nachhaltige
+              Strukturen.
+            </p>
+            <div class="topic-tags">Vereinsarbeit · Community · Führung</div>
+          </a>
+          <a class="topic-card" href="/kategorie/selbstfuehrung-reflexion">
+            <h3>Selbstführung &amp; Reflexion</h3>
+            <p>
+              Lernen, Verantwortung und Entwicklung ohne
+              Selbstoptimierungs-Mythen.
+            </p>
+            <div class="topic-tags">Reflexion · Lernen · Haltung</div>
+          </a>
+          <a class="topic-card" href="/kategorie/produkt-software">
+            <h3>Technik &amp; Software</h3>
+            <p>
+              Praxisnahe Gedanken zu Entwicklung, Tooling, Developer Experience
+              und Customizing.
+            </p>
+            <div class="topic-tags">React · TypeScript · DX · Systeme</div>
+          </a>
         </div>
       </section>
 
       <!-- Blog Overview Section -->
-      <section class="blog-section">
-        <div
-          style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2rem;"
-        >
+      <section class="blog-section" id="artikel">
+        <div class="section-header-row">
           <h2>Neueste Artikel</h2>
           <a href="/blog">Alle Artikel ansehen &rarr;</a>
         </div>
-        <div class="blog-grid">
-          {
-            posts.map((post) => (
-              <a href={`/blog/${post.data.slug || post.id}/`} class="blog-card">
-                <span style="font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 0.5rem;">
-                  {categories[post.data.category]}
+
+        {
+          featuredPost ? (
+            <a
+              href={`/blog/${featuredPost.data.slug || featuredPost.id}/`}
+              class="featured-post"
+            >
+              <div class="featured-post-kicker">Featured</div>
+              <h3>{featuredPost.data.title}</h3>
+              <div class="article-meta">
+                <span class="article-meta-category">
+                  {categories[featuredPost.data.category]}
                 </span>
-                <h3>{post.data.title}</h3>
-                <div class="date">
-                  <FormattedDate date={post.data.date} />
-                </div>
-                <p>{post.data.excerpt}</p>
-              </a>
-            ))
-          }
+                <span class="article-meta-sep">·</span>
+                <FormattedDate date={featuredPost.data.date} />
+                <span class="article-meta-sep">·</span>
+                <span>{getReadingTimeMinutes(featuredPost)} min</span>
+              </div>
+              <p class="featured-post-excerpt">{featuredPost.data.excerpt}</p>
+            </a>
+          ) : null
+        }
+
+        {
+          latestPosts.length ? (
+            <ul class="article-list" aria-label="Weitere Artikel">
+              {latestPosts.map((post) => (
+                <li>
+                  <a
+                    href={`/blog/${post.data.slug || post.id}/`}
+                    class="article-row"
+                  >
+                    <div class="article-row-main">
+                      <h4 class="article-row-title">{post.data.title}</h4>
+                      <div class="article-meta">
+                        <span class="article-meta-category">
+                          {categories[post.data.category]}
+                        </span>
+                        <span class="article-meta-sep">·</span>
+                        <FormattedDate date={post.data.date} />
+                        <span class="article-meta-sep">·</span>
+                        <span>{getReadingTimeMinutes(post)} min</span>
+                      </div>
+                    </div>
+                    <div class="article-row-arrow" aria-hidden="true">
+                      &rarr;
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : null
+        }
+      </section>
+
+      <!-- Signature Section -->
+      <section class="signature-section full-bleed" id="schnittstellen">
+        <div class="signature-inner">
+          <div>
+            <h2>Arbeiten an den Schnittstellen</h2>
+            <p>
+              Die spannendsten Probleme entstehen dort, wo Systeme auf Menschen
+              treffen.
+            </p>
+            <p>
+              Zwischen Technik und Organisation. Zwischen Ehrenamt und
+              Professionalität. Zwischen Anspruch und Machbarkeit.
+            </p>
+            <p>Genau dort setze ich an.</p>
+          </div>
+          <div class="interface-viz" aria-hidden="true">
+            <div class="viz-node node-a"></div>
+            <div class="viz-node node-b"></div>
+            <div class="viz-node node-c"></div>
+            <div class="viz-node node-d"></div>
+            <div class="viz-line line-1"></div>
+            <div class="viz-line line-2"></div>
+            <div class="viz-line line-3"></div>
+          </div>
         </div>
       </section>
 
       <!-- About Section -->
-      <section class="about-section">
-        <Image
-          src={profileImage}
-          alt="Portrait von Ralf Meier"
-          width={375}
-          height={375}
-        />
+      <section class="about-preview">
+        <div class="about-preview-media">
+          <Image
+            src={profileImage}
+            alt="Avatar von Ralf Meier"
+            width={220}
+            height={220}
+          />
+        </div>
         <div>
-          <h2>Über mich</h2>
+          <h2>Kurzprofil</h2>
+          <p class="about-preview-name">Ralf Meier</p>
           <p>
-            <strong>flarmei.de</strong> ist mehr als nur ein Blog. Es ist mein digitaler
-            Garten, in dem ich Gedanken zu Technologie, Management und persönlichem
-            Wachstum kultiviere.
+            Softwareentwickler mit Produktfokus, engagiert im eSports-Ehrenamt.
+            Interesse an klaren Strukturen, guter Zusammenarbeit und
+            nachhaltigen Systemen.
           </p>
-          <p>
-            Dieser Ort dient als Reflexionsraum und Wissenssammlung. Hier teile
-            ich meine Erfahrungen aus der Softwareentwicklung, dem
-            Produktmanagement und meiner ehrenamtlichen Arbeit im eSports.
-          </p>
-          <a href="/about" class="btn btn-secondary" style="margin-top: 1rem;"
-            >Mehr erfahren</a
-          >
+          <ul class="about-preview-bullets">
+            <li>Softwareentwicklung &amp; Produktarbeit</li>
+            <li>Vereinsvorstand im eSports</li>
+            <li>Fokus auf Schnittstellen &amp; Prozesse</li>
+          </ul>
+          <div class="about-preview-links">
+            <a
+              href="https://linkedin.com/in/ralf-meier"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-secondary">LinkedIn</a
+            >
+            <a
+              href="https://github.com/flarmei"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-secondary">GitHub</a
+            >
+            <a href="/kontakt" class="btn btn-primary">Kontakt</a>
+          </div>
         </div>
       </section>
     </main>
