@@ -1,11 +1,10 @@
 ---
-import { SITE_TITLE } from "../consts";
 import HeaderLink from "./HeaderLink.astro";
 ---
 
 <header>
   <nav>
-    <h2><a href="/">{SITE_TITLE}</a></h2>
+    <h2><a href="/" class="logo">flarmei</a></h2>
     <div class="internal-links">
       <HeaderLink href="/">Home</HeaderLink>
       <HeaderLink href="/blog">Blog</HeaderLink>
@@ -17,7 +16,6 @@ import HeaderLink from "./HeaderLink.astro";
 <style>
   header {
     margin: 0;
-    padding: 0 1em;
     background: white;
     box-shadow: 0 2px 8px rgba(var(--black), 5%);
   }
@@ -30,16 +28,26 @@ import HeaderLink from "./HeaderLink.astro";
   h2 a.active {
     text-decoration: none;
   }
+
+  .logo {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: -1px;
+  }
+
   nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1em 2em;
   }
   nav a {
     padding: 1em 0.5em;
     color: var(--black);
     text-decoration: none;
-    font-weight: 500;
   }
   nav a.active {
     text-decoration: none;
