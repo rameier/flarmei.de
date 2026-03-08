@@ -9,10 +9,10 @@ interface Props {
 
 const { title, description, pubDate, category, slug } = Astro.props;
 
-const formattedDate = pubDate.toLocaleDateString('de-DE', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
+const formattedDate = pubDate.toLocaleDateString("de-DE", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
 });
 ---
 
@@ -47,6 +47,7 @@ const formattedDate = pubDate.toLocaleDateString('de-DE', {
     font-size: 0.8rem;
     color: var(--color-text-muted);
     margin-bottom: var(--spacing-xs);
+    font-family: var(--font-sans);
   }
 
   .separator {
@@ -55,18 +56,16 @@ const formattedDate = pubDate.toLocaleDateString('de-DE', {
 
   .category {
     color: var(--color-accent);
-    font-size: 0.8rem;
   }
 
   .post-title {
-    font-size: 1.05rem;
+    font-size: 1.5rem;
     margin-bottom: var(--spacing-xs);
     transition: color 0.2s ease;
   }
 
   .post-description {
     color: var(--color-text-muted);
-    font-size: 0.85rem;
     margin: 0;
   }
 </style>

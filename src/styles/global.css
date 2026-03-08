@@ -22,8 +22,16 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'EB Garamond';
+  src: url('/fonts/EBGaramond-VariableFont_wght.woff2') format('woff2');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --color-bg: #1a1a1a;
+  --color-bg: #262624;
   --color-bg-subtle: #222222;
   --color-text: #d4d4d4;
   --color-text-muted: #888888;
@@ -33,6 +41,8 @@
   --color-link: #8fa8b8;
   --color-link-hover: #b8cdd8;
 
+  --font-serif: 'EB Garamond', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --content-width: 72ch;
   --spacing-xs: 0.25rem;
@@ -56,8 +66,8 @@ html {
 }
 
 body {
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
   line-height: 1.7;
   color: var(--color-text);
   background-color: var(--color-bg);
@@ -75,9 +85,17 @@ main {
 }
 
 h1, h2, h3, h4 {
+  font-family: var(--font-serif);
   color: var(--color-text-heading);
   font-weight: 700;
   line-height: 1.3;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-sans);
 }
 
 h1 {
