@@ -1,66 +1,72 @@
 ---
-import HeaderLink from "./HeaderLink.astro";
+const currentPath = Astro.url.pathname;
+
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/werdegang', label: 'Werdegang' },
+  { href: '/blog', label: 'Blog' },
+];
 ---
 
-<header>
-  <nav>
-    <h2><a href="/" class="logo">flarmei</a></h2>
-    <div class="internal-links">
-      <HeaderLink href="/">Home</HeaderLink>
-      <HeaderLink href="/blog">Blog</HeaderLink>
-      <HeaderLink href="/about">About</HeaderLink>
-      <HeaderLink href="/kontakt">Kontakt</HeaderLink>
-    </div>
+<header class="header">
+  <nav class="nav">
+    <a href="/" class="site-name">flarmei.de</a>
+    <ul class="nav-links">
+      {links.map(link => (
+        <li>
+          <a
+            href={link.href}
+            class:list={[{ active: currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)) }]}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
   </nav>
 </header>
+
 <style>
-  header {
-    margin: 0;
-    background: white;
-    box-shadow: 0 2px 8px rgba(var(--black), 5%);
-  }
-  h2 {
-    margin: 0;
-    font-size: 1em;
+  .header {
+    border-bottom: 1px solid var(--color-border);
   }
 
-  h2 a,
-  h2 a.active {
-    text-decoration: none;
-  }
-
-  .logo {
-    font-family: "Courier New", Courier, monospace;
-    font-size: 1.5em;
-    font-weight: bold;
-    letter-spacing: -1px;
-  }
-
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
+  .nav {
+    max-width: var(--content-width);
     margin: 0 auto;
-    padding: 1em 2em;
-  }
-  nav a {
-    padding: 1em 0.5em;
-    color: var(--black);
-    text-decoration: none;
-  }
-  nav a.active {
-    text-decoration: none;
-    color: var(--accent);
-    font-weight: 700;
-  }
-  .social-links,
-  .social-links a {
+    padding: var(--spacing-md);
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-sans);
   }
-  @media (max-width: 720px) {
-    .social-links {
-      display: none;
-    }
+
+  .site-name {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--color-text-heading);
+    font-size: 1rem;
+  }
+
+  .site-name:hover {
+    color: var(--color-accent);
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-md);
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-links a {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--color-accent);
   }
 </style>

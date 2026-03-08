@@ -1,0 +1,88 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  category: string;
+}
+
+const { title, description, pubDate, updatedDate, category } = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString('de-DE', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const formattedUpdatedDate = updatedDate?.toLocaleDateString('de-DE', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={`${title} - flarmei.de`} description={description}>
+  <article class="post">
+    <header class="post-header">
+      <div class="post-meta">
+        <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+        {formattedUpdatedDate && (
+          <span class="updated"> (aktualisiert: {formattedUpdatedDate})</span>
+        )}
+        <span class="separator">/</span>
+        <a href={`/categories/${category}`} class="category">{category}</a>
+      </div>
+      <h1>{title}</h1>
+    </header>
+    <div class="post-content">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-header {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .post-meta {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+    font-family: var(--font-sans);
+  }
+
+  .updated {
+    color: var(--color-text-muted);
+  }
+
+  .separator {
+    margin: 0 var(--spacing-sm);
+  }
+
+  .category {
+    color: var(--color-accent);
+  }
+
+  .post-content :global(h2) {
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .post-content :global(h3) {
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .post-content :global(p) {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin-bottom: var(--spacing-md);
+  }
+</style>

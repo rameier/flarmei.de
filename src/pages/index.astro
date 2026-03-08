@@ -1,246 +1,52 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
-import { getSortedPosts, type Post } from "../lib/posts";
-import FormattedDate from "../components/FormattedDate.astro";
-import { Image } from "astro:assets";
-import profileImage from "../assets/flarmeiLogo.png";
-import { categories } from "../content/meta/categories";
-
-const allPosts = await getSortedPosts();
-const featuredPost = allPosts[0];
-const latestPosts = allPosts.slice(1, 7);
-
-const WORDS_PER_MINUTE = 200;
-function getReadingTimeMinutes(post: Post) {
-  const body = (post as unknown as { body?: string }).body ?? "";
-  const words = body.trim() ? body.trim().split(/\s+/).length : 0;
-  return Math.max(1, Math.round(words / WORDS_PER_MINUTE));
-}
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<!doctype html>
-<html lang="de">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body>
-    <Header />
-    <main>
-      <!-- Hero Section -->
-      <section class="hero-section">
-        <div class="hero-main">
-            <h1 class="hero-headline">Systeme, Menschen &amp; Schnittstellen</h1>
-            <p class="hero-text">
-            Dieser Blog ist ein Ort für Gedanken aus realen Systemen: aus
-            Softwareentwicklung, Produktarbeit und ehrenamtlicher
-            Organisationsarbeit.
-            </p>
-            <p class="hero-text">
-            Ich schreibe über das, was zwischen den Rollen passiert – zwischen
-            Code und Menschen, zwischen Struktur und Alltag, zwischen Anspruch
-            und Realität.
-            </p>
-            <p class="hero-text">
-            Nicht um Antworten vorzugeben, sondern um Zusammenhänge sichtbar zu
-            machen.
-            </p>
-          <div class="button-group">
-            <a href="#artikel" class="btn btn-primary">Neueste Artikel</a>
-          </div>
-        </div>
+<BaseLayout
+  title="flarmei.de - Ralf Meier"
+  description="Persönlicher Blog und digitale Visitenkarte von Ralf Meier. Softwareentwicklung, Product Management, eSports und persönliche Entwicklung."
+>
+  <section class="intro">
+    <h1>Hallo, ich bin Ralf.</h1>
+    <p class="tagline">
+      Softwareentwickler, Produktdenker und ehrenamtlicher eSports-Organisator aus Bremen.
+    </p>
+    <p>
+      Hier schreibe ich über Dinge, die mich beschäftigen: Technologie, Organisation,
+      persönliche Entwicklung und die Schnittstellen dazwischen. Kein Marketingkanal,
+      sondern ein Ort für Denken, Lernen und Teilen.
+    </p>
+    <nav class="intro-links">
+      <a href="/werdegang">Werdegang &rarr;</a>
+      <a href="/blog">Blog &rarr;</a>
+    </nav>
+  </section>
+</BaseLayout>
 
-        <aside class="hero-meta" aria-label="Themenschwerpunkte">
-          <p class="hero-meta-title">Schwerpunkte</p>
-          <ul class="hero-tags">
-            <li>
-              <a href="/kategorie/produkt-software">Software &amp; Produkt</a>
-            </li>
-            <li>
-              <a href="/kategorie/ehrenamt-gemeinschaft"
-                >eSports &amp; Ehrenamt</a
-              >
-            </li>
-            <li>
-              <a href="/kategorie/selbstfuehrung-reflexion">Selbstführung</a>
-            </li>
-            <li><a href="#schnittstellen">Schnittstellen</a></li>
-          </ul>
-        </aside>
-      </section>
+<style>
+  .intro {
+    padding: var(--spacing-xl) 0;
+  }
 
-      <!-- Topics Section -->
-      <section class="topics-section">
-        <h2 class="section-title">Themen</h2>
-        <div class="grid-container topics-grid">
-          <a class="topic-card" href="/kategorie/systeme-struktur">
-            <h3>Produkt &amp; Organisation</h3>
-            <p>
-              Wie Produktdenken im Alltag funktioniert – und wo es an Realität
-              scheitert.
-            </p>
-            <div class="topic-tags">
-              Produktarbeit · Prozesse · Zusammenarbeit
-            </div>
-          </a>
-          <a class="topic-card" href="/kategorie/ehrenamt-gemeinschaft">
-            <h3>eSports &amp; Ehrenamt</h3>
-            <p>
-              Einblicke in Vereinsarbeit, Gemeinschaftsaufbau und nachhaltige
-              Strukturen.
-            </p>
-            <div class="topic-tags">Vereinsarbeit · Community · Führung</div>
-          </a>
-          <a class="topic-card" href="/kategorie/selbstfuehrung-reflexion">
-            <h3>Selbstführung &amp; Reflexion</h3>
-            <p>
-              Lernen, Verantwortung und Entwicklung ohne
-              Selbstoptimierungs-Mythen.
-            </p>
-            <div class="topic-tags">Reflexion · Lernen · Haltung</div>
-          </a>
-          <a class="topic-card" href="/kategorie/produkt-software">
-            <h3>Technik &amp; Software</h3>
-            <p>
-              Praxisnahe Gedanken zu Entwicklung, Tooling, Developer Experience
-              und Customizing.
-            </p>
-            <div class="topic-tags">React · TypeScript · DX · Systeme</div>
-          </a>
-        </div>
-      </section>
+  .tagline {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    margin-bottom: var(--spacing-lg);
+  }
 
-      <!-- Blog Overview Section -->
-      <section class="blog-section" id="artikel">
-        <div class="section-header-row">
-          <h2>Neueste Artikel</h2>
-          <a href="/blog">Alle Artikel ansehen &rarr;</a>
-        </div>
+  .intro-links {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+    font-family: var(--font-sans);
+  }
 
-        {
-          featuredPost ? (
-            <a
-              href={`/blog/${featuredPost.data.slug || featuredPost.id}/`}
-              class="featured-post"
-            >
-              <div class="featured-post-kicker">Featured</div>
-              <h3>{featuredPost.data.title}</h3>
-              <div class="article-meta">
-                <span class="article-meta-category">
-                  {categories[featuredPost.data.category]}
-                </span>
-                <span class="article-meta-sep">·</span>
-                <FormattedDate date={featuredPost.data.date} />
-                <span class="article-meta-sep">·</span>
-                <span>{getReadingTimeMinutes(featuredPost)} min</span>
-              </div>
-              <p class="featured-post-excerpt">{featuredPost.data.excerpt}</p>
-            </a>
-          ) : null
-        }
+  .intro-links a {
+    color: var(--color-accent);
+    font-size: 0.9rem;
+  }
 
-        {
-          latestPosts.length ? (
-            <ul class="article-list" aria-label="Weitere Artikel">
-              {latestPosts.map((post) => (
-                <li>
-                  <a
-                    href={`/blog/${post.data.slug || post.id}/`}
-                    class="article-row"
-                  >
-                    <div class="article-row-main">
-                      <h4 class="article-row-title">{post.data.title}</h4>
-                      <div class="article-meta">
-                        <span class="article-meta-category">
-                          {categories[post.data.category]}
-                        </span>
-                        <span class="article-meta-sep">·</span>
-                        <FormattedDate date={post.data.date} />
-                        <span class="article-meta-sep">·</span>
-                        <span>{getReadingTimeMinutes(post)} min</span>
-                      </div>
-                    </div>
-                    <div class="article-row-arrow" aria-hidden="true">
-                      &rarr;
-                    </div>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          ) : null
-        }
-      </section>
-
-      <!-- Signature Section -->
-      <section class="signature-section full-bleed" id="schnittstellen">
-        <div class="signature-inner">
-          <div>
-            <h2>Arbeiten an den Schnittstellen</h2>
-            <p>
-              Die spannendsten Probleme entstehen dort, wo Systeme auf Menschen
-              treffen.
-            </p>
-            <p>
-              Zwischen Technik und Organisation. Zwischen Ehrenamt und
-              Professionalität. Zwischen Anspruch und Machbarkeit.
-            </p>
-            <p>Genau dort setze ich an.</p>
-          </div>
-          <div class="interface-viz" aria-hidden="true">
-            <div class="viz-node node-a"></div>
-            <div class="viz-node node-b"></div>
-            <div class="viz-node node-c"></div>
-            <div class="viz-node node-d"></div>
-            <div class="viz-line line-1"></div>
-            <div class="viz-line line-2"></div>
-            <div class="viz-line line-3"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- About Section -->
-      <section class="about-preview">
-        <div class="about-preview-media">
-          <Image
-            src={profileImage}
-            alt="Avatar von Ralf Meier"
-            width={220}
-            height={220}
-          />
-        </div>
-        <div>
-          <h2>Kurzprofil</h2>
-          <p class="about-preview-name">Ralf Meier</p>
-          <p>
-            Softwareentwickler mit Produktfokus, engagiert im eSports-Ehrenamt.
-            Interesse an klaren Strukturen, guter Zusammenarbeit und
-            nachhaltigen Systemen.
-          </p>
-          <ul class="about-preview-bullets">
-            <li>Softwareentwicklung &amp; Produktarbeit</li>
-            <li>Vereinsvorstand im eSports</li>
-            <li>Fokus auf Schnittstellen &amp; Prozesse</li>
-          </ul>
-          <div class="about-preview-links">
-            <a
-              href="https://linkedin.com/in/ralf-meier"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-secondary">LinkedIn</a
-            >
-            <a
-              href="https://github.com/flarmei"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-secondary">GitHub</a
-            >
-            <a href="/kontakt" class="btn btn-primary">Kontakt</a>
-          </div>
-        </div>
-      </section>
-    </main>
-    <Footer />
-  </body>
-</html>
+  .intro-links a:hover {
+    color: var(--color-link-hover);
+  }
+</style>
