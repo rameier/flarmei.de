@@ -2,6 +2,9 @@ node_modules/
 dist/
 build/
 .env
+.env.local
 .astro/
+.next/
+payload-types.ts
 
 *.local.json
