@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import type { SerializedEditorState } from 'lexical'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -57,41 +59,23 @@ export default async function BlogPostPage({ params }: Props) {
   })
 
   return (
-    <>
-      <style>{`
-        .post-header { margin-bottom: var(--spacing-xl); }
-        .post-meta { font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: var(--spacing-md); font-family: var(--font-sans); }
-        .updated { color: var(--color-text-muted); }
-        .separator { margin: 0 var(--spacing-sm); }
-        .category { color: var(--color-accent); }
-        .post-content h2 { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md); }
-        .post-content h3 { margin-top: var(--spacing-lg); margin-bottom: var(--spacing-sm); }
-        .post-content p { margin-bottom: var(--spacing-md); }
-        .post-content ul, .post-content ol { margin-bottom: var(--spacing-md); }
-      `}</style>
-      <article className="post">
-        <header className="post-header">
-          <div className="post-meta">
-            <time dateTime={pubDate.toISOString()}>{formattedDate}</time>
-            {formattedUpdatedDate && (
-              <span className="updated"> (aktualisiert: {formattedUpdatedDate})</span>
-            )}
-            <span className="separator">/</span>
-            <a href={`/categories/${post.category}`} className="category">
-              {post.category as string}
-            </a>
-          </div>
-          <h1>{post.title}</h1>
-        </header>
-        <div className="post-content">
-          {/*
-           * TODO: Render the lexical rich text field (post.content) here using
-           * a serializer such as @payloadcms/richtext-lexical/react once integrated.
-           * For now, the description is shown as a fallback.
-           */}
-          <p>{post.description}</p>
+    <article className="post">
+      <header className="post-header">
+        <div className="post-meta">
+          <time dateTime={pubDate.toISOString()}>{formattedDate}</time>
+          {formattedUpdatedDate && (
+            <span className="updated"> (aktualisiert: {formattedUpdatedDate})</span>
+          )}
+          <span className="separator">/</span>
+          <a href={`/categories/${post.category}`} className="category">
+            {post.category as string}
+          </a>
         </div>
-      </article>
-    </>
+        <h1>{post.title}</h1>
+      </header>
+      <div className="post-content">
+        <RichText data={post.content as SerializedEditorState} />
+      </div>
+    </article>
   )
 }

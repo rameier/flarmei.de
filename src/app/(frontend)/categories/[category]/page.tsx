@@ -39,11 +39,6 @@ export default async function CategoryPage({ params }: Props) {
 
   return (
     <>
-      <style>{`
-        .back-link { margin-bottom: var(--spacing-lg); font-size: 0.85rem; font-family: var(--font-sans); }
-        .posts { margin-top: var(--spacing-md); }
-      `}</style>
-
       <h1>{decodedCategory}</h1>
       <p className="back-link">
         <a href="/blog">&larr; Alle Beiträge</a>

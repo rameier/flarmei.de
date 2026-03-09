@@ -22,27 +22,6 @@ export default async function BlogPage() {
 
   return (
     <>
-      <style>{`
-        .categories {
-          display: flex;
-          flex-wrap: wrap;
-          gap: var(--spacing-sm);
-          align-items: center;
-          margin-bottom: var(--spacing-lg);
-          font-family: var(--font-sans);
-        }
-        .categories-label { color: var(--color-text-muted); }
-        .category-link {
-          color: var(--color-accent);
-          padding: var(--spacing-xs) var(--spacing-sm);
-          border: 1px solid var(--color-border);
-          border-radius: 3px;
-        }
-        .category-link:hover { border-color: var(--color-accent); }
-        .posts { margin-top: var(--spacing-md); }
-        .empty { color: var(--color-text-muted); }
-      `}</style>
-
       <h1>Blog</h1>
 
       {categories.length > 0 && (

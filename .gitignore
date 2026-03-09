@@ -6,5 +6,7 @@ build/
 .astro/
 .next/
 payload-types.ts
+next-env.d.ts
+tsconfig.tsbuildinfo
 
 *.local.json

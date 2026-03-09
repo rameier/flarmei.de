@@ -9,17 +9,6 @@ export const metadata: Metadata = {
 export default function WerdegangPage() {
   return (
     <>
-      <style>{`
-        .cv-section { margin-bottom: var(--spacing-lg); }
-        .cv-entry { margin-bottom: var(--spacing-lg); }
-        .cv-entry h3 { margin-top: 0; margin-bottom: var(--spacing-xs); }
-        .cv-meta { color: var(--color-text-muted); font-size: 0.8rem; margin-bottom: var(--spacing-sm); font-family: var(--font-sans); }
-        .cv-tech { color: var(--color-accent); font-size: 0.8rem; margin-top: var(--spacing-sm); font-family: var(--font-sans); }
-        .cv-skills div { margin-bottom: var(--spacing-md); }
-        .cv-skills h3 { margin-top: 0; margin-bottom: var(--spacing-xs); }
-        .cv-skills p { color: var(--color-text-muted); font-size: 0.85rem; }
-      `}</style>
-
       <h1>Werdegang</h1>
 
       <section className="cv-section">

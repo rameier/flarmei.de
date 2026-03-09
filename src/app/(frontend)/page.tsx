@@ -22,29 +22,6 @@ export default function HomePage() {
         <a href="/werdegang">Werdegang &rarr;</a>
         <a href="/blog">Blog &rarr;</a>
       </nav>
-      <style>{`
-        .intro {
-          padding: var(--spacing-xl) 0;
-        }
-        .tagline {
-          color: var(--color-text-muted);
-          font-size: 1rem;
-          margin-bottom: var(--spacing-lg);
-        }
-        .intro-links {
-          display: flex;
-          gap: var(--spacing-lg);
-          margin-top: var(--spacing-xl);
-          font-family: var(--font-sans);
-        }
-        .intro-links a {
-          color: var(--color-accent);
-          font-size: 0.9rem;
-        }
-        .intro-links a:hover {
-          color: var(--color-link-hover);
-        }
-      `}</style>
     </section>
   )
 }

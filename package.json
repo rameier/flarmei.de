@@ -18,7 +18,7 @@
     "payload": "3.79.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sharp": "^0.32.0"
+    "sharp": "^0.34.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
