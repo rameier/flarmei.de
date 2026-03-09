@@ -17,8 +17,8 @@ export default function PostCard({ title, description, pubDate, category, slug }
     <>
       <style>{`
         .post-card { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--color-border); }
-        .post-card > a { color: inherit; display: block; }
-        .post-card > a:hover .post-title { color: var(--color-accent); }
+        .post-card-link { color: inherit; display: block; }
+        .post-card-link:hover .post-title { color: var(--color-accent); }
         .post-meta { font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: var(--spacing-xs); font-family: var(--font-sans); }
         .separator { margin: 0 var(--spacing-sm); }
         .category { color: var(--color-accent); }
@@ -26,12 +26,12 @@ export default function PostCard({ title, description, pubDate, category, slug }
         .post-description { color: var(--color-text-muted); margin: 0; }
       `}</style>
       <article className="post-card">
-        <a href={`/blog/${slug}`}>
-          <div className="post-meta">
-            <time dateTime={pubDate.toISOString()}>{formattedDate}</time>
-            <span className="separator">/</span>
-            <a href={`/categories/${category}`} className="category">{category}</a>
-          </div>
+        <div className="post-meta">
+          <time dateTime={pubDate.toISOString()}>{formattedDate}</time>
+          <span className="separator">/</span>
+          <a href={`/categories/${category}`} className="category">{category}</a>
+        </div>
+        <a href={`/blog/${slug}`} className="post-card-link">
           <h3 className="post-title">{title}</h3>
           <p className="post-description">{description}</p>
         </a>

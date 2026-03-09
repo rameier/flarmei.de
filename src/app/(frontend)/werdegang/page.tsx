@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     'Beruflicher und ehrenamtlicher Werdegang von Ralf Meier. Softwareentwicklung, CPQ, Product Management und eSports-Vereinsarbeit.',
 }
 
-export default function WerdeganPage() {
+export default function WerdegangPage() {
   return (
     <>
       <style>{`

@@ -84,7 +84,11 @@ export default async function BlogPostPage({ params }: Props) {
           <h1>{post.title}</h1>
         </header>
         <div className="post-content">
-          {/* Rich text content rendered by PayloadCMS will be here */}
+          {/*
+           * TODO: Render the lexical rich text field (post.content) here using
+           * a serializer such as @payloadcms/richtext-lexical/react once integrated.
+           * For now, the description is shown as a fallback.
+           */}
           <p>{post.description}</p>
         </div>
       </article>
