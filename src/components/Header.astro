@@ -2,9 +2,9 @@
 const currentPath = Astro.url.pathname;
 
 const links = [
-  { href: '/', label: 'Home' },
-  { href: '/werdegang', label: 'Werdegang' },
-  { href: '/blog', label: 'Blog' },
+  { href: "/", label: "Home" },
+  { href: "/about", label: "Über mich" },
+  { href: "/blog", label: "Blog" },
 ];
 ---
 
@@ -12,16 +12,24 @@ const links = [
   <nav class="nav">
     <a href="/" class="site-name">flarmei.de</a>
     <ul class="nav-links">
-      {links.map(link => (
-        <li>
-          <a
-            href={link.href}
-            class:list={[{ active: currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)) }]}
-          >
-            {link.label}
-          </a>
-        </li>
-      ))}
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                {
+                  active:
+                    currentPath === link.href ||
+                    (link.href !== "/" && currentPath.startsWith(link.href)),
+                },
+              ]}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
     </ul>
   </nav>
 </header>
