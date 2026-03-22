@@ -32,13 +32,13 @@ category: "Kategorie"
 ---
 ```
 
-| Field | Type | Required | Notes |
-|---|---|---|---|
-| `title` | string | yes | Full article title |
-| `description` | string | yes | Short summary, shown in post cards |
-| `pubDate` | date | yes | Format: `YYYY-MM-DD` |
-| `category` | string | yes | Free-text category tag |
-| `updatedDate` | date | no | Only when an existing post was revised |
+| Field         | Type   | Required | Notes                                  |
+| ------------- | ------ | -------- | -------------------------------------- |
+| `title`       | string | yes      | Full article title                     |
+| `description` | string | yes      | Short summary, shown in post cards     |
+| `pubDate`     | date   | yes      | Format: `YYYY-MM-DD`                   |
+| `category`    | string | yes      | Free-text category tag                 |
+| `updatedDate` | date   | no       | Only when an existing post was revised |
 
 ## Role of the AI
 
