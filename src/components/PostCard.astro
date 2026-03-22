@@ -8,6 +8,8 @@ interface Props {
 }
 
 const { title, description, pubDate, category, slug } = Astro.props;
+const normalizedSlug = slug.replace(/\.md$/, "");
+const encodedCategory = encodeURIComponent(category);
 
 const formattedDate = pubDate.toLocaleDateString("de-DE", {
   year: "numeric",
@@ -17,12 +19,12 @@ const formattedDate = pubDate.toLocaleDateString("de-DE", {
 ---
 
 <article class="post-card">
-  <a href={`/blog/${slug}`}>
-    <div class="post-meta">
-      <time datetime={pubDate.toISOString()}>{formattedDate}</time>
-      <span class="separator">/</span>
-      <a href={`/categories/${category}`} class="category">{category}</a>
-    </div>
+  <div class="post-meta">
+    <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+    <span class="separator">/</span>
+    <a href={`/categories/${encodedCategory}`} class="category">{category}</a>
+  </div>
+  <a href={`/blog/${normalizedSlug}`} class="post-link">
     <h3 class="post-title">{title}</h3>
     <p class="post-description">{description}</p>
   </a>
@@ -34,12 +36,12 @@ const formattedDate = pubDate.toLocaleDateString("de-DE", {
     border-bottom: 1px solid var(--color-border);
   }
 
-  .post-card > a {
+  .post-link {
     color: inherit;
     display: block;
   }
 
-  .post-card > a:hover .post-title {
+  .post-link:hover .post-title {
     color: var(--color-accent);
   }
 

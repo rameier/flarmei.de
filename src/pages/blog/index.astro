@@ -21,7 +21,7 @@ const categories = [...new Set(posts.map((post) => post.data.category))];
       <nav class="categories">
         <span class="categories-label">Kategorien:</span>
         {categories.map((cat) => (
-          <a href={`/categories/${cat}`} class="category-link">
+          <a href={`/categories/${encodeURIComponent(cat)}`} class="category-link">
             {cat}
           </a>
         ))}
