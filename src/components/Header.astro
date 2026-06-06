@@ -1,0 +1,33 @@
+---
+const currentPath = Astro.url.pathname;
+
+const links = [
+  { href: '/', label: 'schreiben', match: ['/', '/blog', '/themen'] },
+  { href: '/ueber', label: 'über', match: ['/ueber'] },
+  { href: '/now', label: 'now', match: ['/now'] },
+];
+
+function isActive(link: (typeof links)[number]) {
+  return link.match.some((match) =>
+    match === '/'
+      ? currentPath === '/' || currentPath.startsWith('/blog')
+      : currentPath.startsWith(match),
+  );
+}
+---
+
+<header class="site-head">
+  <a class="brand" href="/" aria-label="flarmei Startseite">
+    <img src="/profile.png" alt="" class="avatar" loading="eager" />
+    <span class="wordmark"><b>~/</b>flarmei</span>
+  </a>
+  <nav class="nav" aria-label="Hauptnavigation">
+    {
+      links.map((link) => (
+        <a href={link.href} class:list={[{ on: isActive(link) }]}>
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+</header>

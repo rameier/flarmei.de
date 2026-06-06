@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import EmptyWriting from '../components/EmptyWriting.astro';
+import PostRow from '../components/PostRow.astro';
+import TopicTag from '../components/TopicTag.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { estimateReadMinutes, formatDate, getPostSlug, sortPosts } from '../lib/posts';
+
+const posts = sortPosts(await getCollection('blog'));
+const [lead, ...rest] = posts;
+---
+
+<BaseLayout
+  title="flarmei.de - Ralf Meier"
+  description="Persönlicher Blog von Ralf Meier über Agentic Engineering, Developer Experience, Führung, Esports und Selbstreflexion."
+>
+  <section class="lede fade">
+    <h1>Notizen über Bauen, Führen und <em>Aufmerksamkeit.</em></h1>
+    <p>
+      Texte über agentisches Engineering, Developer Experience, technische
+      Führung, Esports und den gelegentlichen ehrlichen Blick nach innen.
+    </p>
+  </section>
+
+  {
+    lead ? (
+      <>
+        <article class="featured fade">
+          <div class="fmark micro">Neuester Text</div>
+          <div>
+            <TopicTag topic={lead.data.topic} />
+            <h2>
+              <a href={`/blog/${getPostSlug(lead)}`}>{lead.data.title}</a>
+            </h2>
+          </div>
+          <div>
+            <p class="fdek">{lead.data.description}</p>
+            <div class="fmeta">
+              <span class="micro">{formatDate(lead.data.pubDate)}</span>
+              <span class="rread mono">{estimateReadMinutes(lead)} min lesen</span>
+      <a class="mono read-link" href={`/blog/${getPostSlug(lead)}`}>Lesen -&gt;</a>
+            </div>
+          </div>
+        </article>
+        <hr class="hairline" />
+        <section class="post-list" aria-label="Weitere Texte">
+          {rest.map((post) => <PostRow post={post} />)}
+        </section>
+      </>
+    ) : (
+      <EmptyWriting />
+    )
+  }
+</BaseLayout>

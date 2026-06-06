@@ -1,0 +1,11 @@
+---
+import { getTopicLabel, type TopicKey } from '../lib/topics';
+
+interface Props {
+  topic: TopicKey;
+}
+
+const { topic } = Astro.props;
+---
+
+<span class="tag">{getTopicLabel(topic)}</span>
