@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import EmptyWriting from '../../components/EmptyWriting.astro';
+import PostRow from '../../components/PostRow.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sortPosts } from '../../lib/posts';
+import { topicOrder, topics, type TopicKey } from '../../lib/topics';
+
+export function getStaticPaths() {
+  return topicOrder.map((topic) => ({
+    params: { topic },
+    props: { topic },
+  }));
+}
+
+const { topic } = Astro.props as { topic: TopicKey };
+const posts = sortPosts(await getCollection('blog')).filter(
+  (post) => post.data.topic === topic,
+);
+const label = topics[topic].label;
+---
+
+<BaseLayout
+  title={`${label} - flarmei.de`}
+  description={`Texte von Ralf Meier zum Thema ${label}.`}
+>
+  <header class="page-head fade">
+    <span class="micro">Thema</span>
+    <h1>{label}</h1>
+  </header>
+
+  {
+    posts.length ? (
+      <section class="post-list" aria-label={`Texte zu ${label}`}>
+        {posts.map((post) => <PostRow post={post} />)}
+      </section>
+    ) : (
+      <EmptyWriting />
+    )
+  }
+</BaseLayout>

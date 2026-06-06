@@ -97,3 +97,13 @@ Entwicklung wird sichtbar gemacht – nicht nur Ergebnisse.
 Es ist ein **persönlicher Denk- und Entwicklungsraum**, der Beruf, Ehrenamt und persönliche Reflexion zusammenführt.
 
 Ziel ist es, Erfahrungen zu teilen, Zusammenhänge sichtbar zu machen und andere zum eigenen Nachdenken anzuregen.
+
+---
+
+## Blog schreiben
+
+Neue Artikel werden als MDX-Dateien in `src/content/blog/` abgelegt. Die
+minimalen Pflichtfelder sind `title`, `description`, `pubDate` und `topic`.
+
+Als Startpunkt dient `templates/blog-post.mdx`. Die ausführlichen Regeln stehen
+in `.github/instructions/new-blog-post.instructions.md`.

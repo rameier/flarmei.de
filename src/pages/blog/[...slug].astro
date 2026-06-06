@@ -1,25 +1,26 @@
 ---
 import { getCollection, render } from 'astro:content';
+import Callout from '../../components/mdx/Callout.astro';
+import Sidenote from '../../components/mdx/Sidenote.astro';
 import PostLayout from '../../layouts/PostLayout.astro';
+import { getPostSlug, sortPosts } from '../../lib/posts';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map(post => ({
-    params: { slug: post.id.replace(/\.md$/, '') },
-    props: { post },
+  const posts = sortPosts(await getCollection('blog'));
+
+  return posts.map((post, index) => ({
+    params: { slug: getPostSlug(post) },
+    props: {
+      post,
+      nextPost: posts.length > 1 ? posts[(index + 1) % posts.length] : undefined,
+    },
   }));
 }
 
-const { post } = Astro.props;
+const { post, nextPost } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<PostLayout
-  title={post.data.title}
-  description={post.data.description}
-  pubDate={post.data.pubDate}
-  updatedDate={post.data.updatedDate}
-  category={post.data.category}
->
-  <Content />
+<PostLayout post={post} nextPost={nextPost}>
+  <Content components={{ Sidenote, Callout }} />
 </PostLayout>

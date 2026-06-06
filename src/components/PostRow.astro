@@ -1,0 +1,28 @@
+---
+import type { BlogPost } from '../lib/posts';
+import { estimateReadMinutes, formatDate, getPostSlug } from '../lib/posts';
+import TopicTag from './TopicTag.astro';
+
+interface Props {
+  post: BlogPost;
+  prefix?: string;
+}
+
+const { post, prefix } = Astro.props;
+const slug = getPostSlug(post);
+---
+
+<article class="row">
+  <div class="rdate mono">{prefix ?? formatDate(post.data.pubDate, 'short')}</div>
+  <div class="rmain">
+    <h2 class="rtitle">
+      <a href={`/blog/${slug}`}>{post.data.title}</a>
+    </h2>
+    <p class="rdek">{post.data.description}</p>
+    <div class="rmeta">
+      <TopicTag topic={post.data.topic} />
+      <span class="rread">{estimateReadMinutes(post)} min</span>
+    </div>
+  </div>
+  <div class="rarrow" aria-hidden="true">-&gt;</div>
+</article>

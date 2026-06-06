@@ -1,88 +1,72 @@
 ---
+import TopicTag from '../components/TopicTag.astro';
+import type { BlogPost } from '../lib/posts';
+import { estimateReadMinutes, formatDate, getPostSlug } from '../lib/posts';
 import BaseLayout from './BaseLayout.astro';
 
 interface Props {
-  title: string;
-  description: string;
-  pubDate: Date;
-  updatedDate?: Date;
-  category: string;
+  post: BlogPost;
+  nextPost?: BlogPost;
 }
 
-const { title, description, pubDate, updatedDate, category } = Astro.props;
-
-const formattedDate = pubDate.toLocaleDateString('de-DE', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
-
-const formattedUpdatedDate = updatedDate?.toLocaleDateString('de-DE', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+const { post, nextPost } = Astro.props;
 ---
 
-<BaseLayout title={`${title} - flarmei.de`} description={description}>
-  <article class="post">
+<BaseLayout
+  title={`${post.data.title} - flarmei.de`}
+  description={post.data.description}
+  type="article"
+>
+  <div class="progress" data-progress></div>
+  <article class="fade">
     <header class="post-header">
-      <div class="post-meta">
-        <time datetime={pubDate.toISOString()}>{formattedDate}</time>
-        {formattedUpdatedDate && (
-          <span class="updated"> (aktualisiert: {formattedUpdatedDate})</span>
-        )}
-        <span class="separator">/</span>
-        <a href={`/categories/${category}`} class="category">{category}</a>
+      <a class="back" href="/blog">&lt;- alle Texte</a>
+      <TopicTag topic={post.data.topic} />
+      <h1>{post.data.title}</h1>
+      <p class="dek">{post.data.description}</p>
+      <div class="byline">
+        <span class="micro">Ralf Meier</span>
+        <time class="micro" datetime={post.data.pubDate.toISOString()}>
+          {formatDate(post.data.pubDate)}
+        </time>
+        <span class="micro">{estimateReadMinutes(post)} min lesen</span>
       </div>
-      <h1>{title}</h1>
     </header>
-    <div class="post-content">
+    <hr class="hairline" />
+
+    <div class="article">
       <slot />
     </div>
   </article>
+
+  {
+    nextPost && (
+      <nav class="post-nav" aria-label="Nächster Artikel">
+        <hr class="hairline" />
+        <article class="row">
+          <div class="rdate mono">NEXT</div>
+          <div class="rmain">
+            <h2 class="rtitle">
+              <a href={`/blog/${getPostSlug(nextPost)}`}>{nextPost.data.title}</a>
+            </h2>
+            <p class="rdek">{nextPost.data.description}</p>
+          </div>
+          <div class="rarrow" aria-hidden="true">-&gt;</div>
+        </article>
+      </nav>
+    )
+  }
+
+  <script>
+    const bar = document.querySelector('[data-progress]');
+    const updateProgress = () => {
+      if (!bar) return;
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - doc.clientHeight;
+      const progress = max > 0 ? Math.min(1, doc.scrollTop / max) : 0;
+      bar.setAttribute('style', `width: ${progress * 100}%`);
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  </script>
 </BaseLayout>
-
-<style>
-  .post-header {
-    margin-bottom: var(--spacing-xl);
-  }
-
-  .post-meta {
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
-    margin-bottom: var(--spacing-md);
-    font-family: var(--font-sans);
-  }
-
-  .updated {
-    color: var(--color-text-muted);
-  }
-
-  .separator {
-    margin: 0 var(--spacing-sm);
-  }
-
-  .category {
-    color: var(--color-accent);
-  }
-
-  .post-content :global(h2) {
-    margin-top: var(--spacing-xl);
-    margin-bottom: var(--spacing-md);
-  }
-
-  .post-content :global(h3) {
-    margin-top: var(--spacing-lg);
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .post-content :global(p) {
-    margin-bottom: var(--spacing-md);
-  }
-
-  .post-content :global(ul),
-  .post-content :global(ol) {
-    margin-bottom: var(--spacing-md);
-  }
-</style>

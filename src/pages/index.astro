@@ -1,53 +1,54 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from 'astro:content';
+import EmptyWriting from '../components/EmptyWriting.astro';
+import PostRow from '../components/PostRow.astro';
+import TopicTag from '../components/TopicTag.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { estimateReadMinutes, formatDate, getPostSlug, sortPosts } from '../lib/posts';
+
+const posts = sortPosts(await getCollection('blog'));
+const [lead, ...rest] = posts;
 ---
 
 <BaseLayout
   title="flarmei.de - Ralf Meier"
-  description="Persönlicher Blog und digitale Visitenkarte von Ralf Meier. Softwareentwicklung, Product Management, eSports und persönliche Entwicklung."
+  description="Persönlicher Blog von Ralf Meier über Agentic Engineering, Developer Experience, Führung, Esports und Selbstreflexion."
 >
-  <section class="intro">
-    <h1>Hallo, ich bin Ralf.</h1>
-    <p class="tagline">
-      Softwareentwickler, Produktdenker und ehrenamtlicher eSports-Organisator
-      aus Bremen.
-    </p>
+  <section class="lede fade">
+    <h1>Notizen über Bauen, Führen und <em>Aufmerksamkeit.</em></h1>
     <p>
-      Hier schreibe ich über Dinge, die mich beschäftigen: Technologie,
-      Organisation, persönliche Entwicklung und die Schnittstellen dazwischen.
-      Kein Marketingkanal, sondern ein Ort für Denken, Lernen und Teilen.
+      Texte über agentisches Engineering, Developer Experience, technische
+      Führung, Esports und den gelegentlichen ehrlichen Blick nach innen.
     </p>
-    <nav class="intro-links">
-      <a href="/werdegang">Über mich &rarr;</a>
-      <a href="/blog">Blog &rarr;</a>
-    </nav>
   </section>
+
+  {
+    lead ? (
+      <>
+        <article class="featured fade">
+          <div class="fmark micro">Neuester Text</div>
+          <div>
+            <TopicTag topic={lead.data.topic} />
+            <h2>
+              <a href={`/blog/${getPostSlug(lead)}`}>{lead.data.title}</a>
+            </h2>
+          </div>
+          <div>
+            <p class="fdek">{lead.data.description}</p>
+            <div class="fmeta">
+              <span class="micro">{formatDate(lead.data.pubDate)}</span>
+              <span class="rread mono">{estimateReadMinutes(lead)} min lesen</span>
+      <a class="mono read-link" href={`/blog/${getPostSlug(lead)}`}>Lesen -&gt;</a>
+            </div>
+          </div>
+        </article>
+        <hr class="hairline" />
+        <section class="post-list" aria-label="Weitere Texte">
+          {rest.map((post) => <PostRow post={post} />)}
+        </section>
+      </>
+    ) : (
+      <EmptyWriting />
+    )
+  }
 </BaseLayout>
-
-<style>
-  .intro {
-    padding: var(--spacing-xl) 0;
-  }
-
-  .tagline {
-    color: var(--color-text-muted);
-    font-size: 1rem;
-    margin-bottom: var(--spacing-lg);
-  }
-
-  .intro-links {
-    display: flex;
-    gap: var(--spacing-lg);
-    margin-top: var(--spacing-xl);
-    font-family: var(--font-sans);
-  }
-
-  .intro-links a {
-    color: var(--color-accent);
-    font-size: 0.9rem;
-  }
-
-  .intro-links a:hover {
-    color: var(--color-link-hover);
-  }
-</style>

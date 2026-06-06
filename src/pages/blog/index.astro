@@ -1,81 +1,34 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import PostCard from "../../components/PostCard.astro";
-import { getCollection } from "astro:content";
+import { getCollection } from 'astro:content';
+import EmptyWriting from '../../components/EmptyWriting.astro';
+import PostRow from '../../components/PostRow.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sortPosts } from '../../lib/posts';
+import { topicOrder, topics } from '../../lib/topics';
 
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
-
-const categories = [...new Set(posts.map((post) => post.data.category))];
+const posts = sortPosts(await getCollection('blog'));
 ---
 
 <BaseLayout
-  title="Blog - flarmei.de"
-  description="Blog von Ralf Meier über Softwareentwicklung, Product Management, eSports und persönliche Entwicklung."
+  title="Schreiben - flarmei.de"
+  description="Alle Texte von Ralf Meier über Engineering, Führung, Esports und Selbstreflexion."
 >
-  <h1>Blog</h1>
+  <header class="page-head fade">
+    <span class="micro">Schreiben</span>
+    <h1>Texte, die beim Denken helfen sollen.</h1>
+  </header>
+
+  <nav class="topic-nav" aria-label="Themen">
+    {topicOrder.map((key) => <a href={`/themen/${key}`}>{topics[key].label}</a>)}
+  </nav>
 
   {
-    categories.length > 0 && (
-      <nav class="categories">
-        <span class="categories-label">Kategorien:</span>
-        {categories.map((cat) => (
-          <a href={`/categories/${encodeURIComponent(cat)}`} class="category-link">
-            {cat}
-          </a>
-        ))}
-      </nav>
+    posts.length ? (
+      <section class="post-list" aria-label="Alle Texte">
+        {posts.map((post) => <PostRow post={post} />)}
+      </section>
+    ) : (
+      <EmptyWriting />
     )
   }
-
-  <section class="posts">
-    {
-      posts.map((post) => (
-        <PostCard
-          title={post.data.title}
-          description={post.data.description}
-          pubDate={post.data.pubDate}
-          category={post.data.category}
-          slug={post.id}
-        />
-      ))
-    }
-  </section>
-
-  {posts.length === 0 && <p class="empty">Noch keine Beiträge vorhanden.</p>}
 </BaseLayout>
-
-<style>
-  .categories {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-sm);
-    align-items: center;
-    margin-bottom: var(--spacing-lg);
-    font-family: var(--font-sans);
-  }
-
-  .categories-label {
-    color: var(--color-text-muted);
-  }
-
-  .category-link {
-    color: var(--color-accent);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border: 1px solid var(--color-border);
-    border-radius: 3px;
-  }
-
-  .category-link:hover {
-    border-color: var(--color-accent);
-  }
-
-  .posts {
-    margin-top: var(--spacing-md);
-  }
-
-  .empty {
-    color: var(--color-text-muted);
-  }
-</style>
