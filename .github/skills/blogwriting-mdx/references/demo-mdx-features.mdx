@@ -1,0 +1,85 @@
+---
+title: "MDX Demo: Alle Bausteine"
+description: "Ein technischer Demo-Artikel, der Überschriften, Formatierungen, Tabellen, Bilder, Zitate, Fußnoten und eigene MDX-Komponenten prüft."
+pubDate: 2026-06-05
+topic: agentic
+---
+
+import Sidenote from '../../components/mdx/Sidenote.astro';
+import Callout from '../../components/mdx/Callout.astro';
+
+Dieser Artikel ist ein bewusst künstlicher Testfall. Er zeigt, welche
+Schreib- und Layout-Bausteine in einem Blogpost funktionieren.
+
+<Sidenote label="Randnotiz">
+Sidenotes sind kleine Ergänzungen neben dem Lesefluss. Auf schmalen Displays
+werden sie als normale eingerückte Box dargestellt.
+</Sidenote>
+
+## Überschrift zweiter Ebene
+
+Ein Absatz kann **fetten Text**, *kursiven Text*, `Inline-Code`, Links wie
+[Astro](https://astro.build/) und normale Satzzeichen enthalten. Der Textfluss
+soll dabei ruhig bleiben und nicht nach Dokumentation aussehen.
+
+### Überschrift dritter Ebene
+
+Listen funktionieren ebenfalls:
+
+- erster Punkt mit kurzem Text
+- zweiter Punkt mit **Hervorhebung**
+- dritter Punkt mit `code`
+
+Nummerierte Listen:
+
+1. Kontext herstellen
+2. Entscheidung sichtbar machen
+3. Konsequenz prüfen
+
+<Callout>
+Ein Callout ist für kurze Hinweise gedacht, die stärker als Fließtext wirken
+sollen, aber nicht so groß wie ein eigener Abschnitt werden.
+</Callout>
+
+## Zitate und Fußnoten
+
+> Ein gutes Zitat sollte im Layout Luft bekommen, ohne den Artikel zu
+> zerreißen.[^quote]
+
+Normale Fußnoten können direkt im Fließtext verwendet werden.[^note] Sie eignen
+sich für Quellen, Nebengedanken oder kleine Einschränkungen.
+
+## Tabelle
+
+| Baustein | Syntax | Zweck |
+| --- | --- | --- |
+| Fett | `**Text**` | Betonung im Satz |
+| Kursiv | `*Text*` | Ton oder Nebenakzent |
+| Code | `` `pnpm build` `` | Befehle und Bezeichner |
+| Sidenote | `<Sidenote>` | Randnotiz zum Abschnitt |
+
+## Bild
+
+![Profilbild von Ralf Meier](/profile.png)
+
+Das Bild nutzt eine Datei aus `public/`. Für echte Artikel sollte der Alt-Text
+beschreiben, was Leserinnen und Leser im Bild sehen oder warum es dort steht.
+
+## Codeblock
+
+```ts
+type Topic = 'agentic' | 'devex' | 'leadership' | 'esports' | 'reflection';
+
+export function label(topic: Topic) {
+  return topic.toUpperCase();
+}
+```
+
+## Abschließender Abschnitt
+
+Wenn dieser Artikel sauber baut, sind die wichtigsten MDX-Funktionen für neue
+Blogposts abgedeckt: Markdown, MDX-Komponenten, Tabellen, Bilder, Zitate,
+Codeblöcke und Fußnoten.
+
+[^quote]: Diese Fußnote hängt an einem Blockquote und prüft, ob Zitate mit Fußnoten sauber gerendert werden.
+[^note]: Diese Fußnote hängt an einem normalen Absatz.
