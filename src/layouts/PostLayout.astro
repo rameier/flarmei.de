@@ -1,8 +1,9 @@
 ---
-import TopicTag from '../components/TopicTag.astro';
-import type { BlogPost } from '../lib/posts';
-import { estimateReadMinutes, formatDate, getPostSlug } from '../lib/posts';
-import BaseLayout from './BaseLayout.astro';
+import TopicTag from "../components/TopicTag.astro";
+import { Image } from "astro:assets";
+import type { BlogPost } from "../lib/posts";
+import { estimateReadMinutes, formatDate, getPostSlug } from "../lib/posts";
+import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
   post: BlogPost;
@@ -32,6 +33,21 @@ const { post, nextPost } = Astro.props;
         <span class="micro">{estimateReadMinutes(post)} min lesen</span>
       </div>
     </header>
+
+    {
+      post.data.heroImage && (
+        <Image
+          class="hero-image"
+          src={post.data.heroImage}
+          alt={post.data.heroImageAlt ?? post.data.title}
+          width={1600}
+          height={900}
+          fit="cover"
+          sizes="(max-width: 860px) 100vw, 748px"
+        />
+      )
+    }
+
     <hr class="hairline" />
 
     <div class="article">
@@ -43,30 +59,53 @@ const { post, nextPost } = Astro.props;
     nextPost && (
       <nav class="post-nav" aria-label="Nächster Artikel">
         <hr class="hairline" />
-        <article class="row">
-          <div class="rdate mono">NEXT</div>
+        <article
+          class:list={[
+            "row",
+            "post-nav-row",
+            { "post-nav-row--with-thumb": !!nextPost.data.heroImage },
+          ]}
+        >
+          {nextPost.data.heroImage && (
+            <Image
+              class="post-nav-thumb"
+              src={nextPost.data.heroImage}
+              alt={nextPost.data.heroImageAlt ?? nextPost.data.title}
+              width={208}
+              height={117}
+              fit="cover"
+              sizes="(max-width: 620px) 100vw, 104px"
+            />
+          )}
           <div class="rmain">
+            <div class="rmeta">
+              <span class="micro">NEXT</span>
+            </div>
             <h2 class="rtitle">
-              <a href={`/blog/${getPostSlug(nextPost)}`}>{nextPost.data.title}</a>
+              <a href={`/blog/${getPostSlug(nextPost)}`}>
+                {nextPost.data.title}
+              </a>
             </h2>
             <p class="rdek">{nextPost.data.description}</p>
           </div>
-          <div class="rarrow" aria-hidden="true">-&gt;</div>
+          <div class="rarrow" aria-hidden="true">
+            -&gt;
+          </div>
         </article>
       </nav>
     )
   }
 
   <script>
-    const bar = document.querySelector('[data-progress]');
+    const bar = document.querySelector("[data-progress]");
     const updateProgress = () => {
       if (!bar) return;
       const doc = document.documentElement;
       const max = doc.scrollHeight - doc.clientHeight;
       const progress = max > 0 ? Math.min(1, doc.scrollTop / max) : 0;
-      bar.setAttribute('style', `width: ${progress * 100}%`);
+      bar.setAttribute("style", `width: ${progress * 100}%`);
     };
-    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener("scroll", updateProgress, { passive: true });
     updateProgress();
   </script>
 </BaseLayout>
