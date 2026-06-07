@@ -31,19 +31,19 @@ topic: agentic
 
 Required fields:
 
-| Field | Type | Notes |
-| --- | --- | --- |
-| `title` | string | Full article title |
+| Field         | Type   | Notes                                     |
+| ------------- | ------ | ----------------------------------------- |
+| `title`       | string | Full article title                        |
 | `description` | string | Short summary shown in lists and metadata |
-| `pubDate` | date | Format: `YYYY-MM-DD` |
-| `topic` | enum | One of the fixed topic keys below |
+| `pubDate`     | date   | Format: `YYYY-MM-DD`                      |
+| `topic`       | enum   | One of the fixed topic keys below         |
 
 ## Topic Keys
 
 - `agentic` - Agentisches Engineering
 - `devex` - Developer Experience
 - `leadership` - Führung
-- `esports` - Esports
+- `esports` - E-Sports
 - `reflection` - Selbstreflexion
 
 ## MDX Components
@@ -51,11 +51,9 @@ Required fields:
 Normal Markdown is enough for most posts. For a margin note, import and use:
 
 ```mdx
-import Sidenote from '../../components/mdx/Sidenote.astro';
+import Sidenote from "../../components/mdx/Sidenote.astro";
 
-<Sidenote>
-Eine kurze Randnotiz.
-</Sidenote>
+<Sidenote>Eine kurze Randnotiz.</Sidenote>
 ```
 
 If the relative import differs because the file is nested, adjust the path.
