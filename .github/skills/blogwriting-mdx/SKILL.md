@@ -15,7 +15,7 @@ Help with the mechanics and structure of MDX blog posts for flarmei.de while pre
 
 - Published posts live in `src/content/blog/`.
 - Start from `templates/blog-post.mdx`.
-- Use `src/content/blog/demo-mdx-features.mdx` as a reference for supported MDX features and formatting patterns.
+- Use `./references/demo-mdx-features.mdx` as a reference for supported MDX features and formatting patterns.
 - Follow `.github/instructions/new-blog-post.instructions.md` for repository-specific rules.
 
 ## Required Frontmatter

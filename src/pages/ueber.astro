@@ -4,47 +4,82 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="Über mich - flarmei.de"
-  description="Ralf Meier - Softwareentwicklung, KI, Esports und was ich gerade rausfinde."
+  description="Ralf Meier – Product Operations & DX Design in Bremen. Mein Antrieb sind Menschen und Entwicklung."
 >
   <section class="page fade">
     <header class="page-head">
       <span class="micro">Über</span>
-      <h1>Ich baue Software - und Strukturen, in denen Menschen gut arbeiten.</h1>
+      <h1>Ich arbeite an Developer Experience. Und merke jedes Mal aufs Neue: Es geht <em>nie wirklich</em> um die Tools.</h1>
     </header>
 
-    <p class="lead">
-      Ich bin Ralf Meier. Softwareentwickler aus Bremen, mit einem ziemlich
-      hartnäckigen Interesse daran, wie Tools, Prozesse und kleine Reibungen
-      die Arbeit von Entwicklerinnen und Entwicklern prägen.
-    </p>
-
-    <figure class="portrait-fig">
-      <img src="/profile.png" alt="Porträt von Ralf Meier" class="portrait" />
-      <figcaption>flarmei, irgendwo zwischen Code und Kontext</figcaption>
-    </figure>
+    <div class="lead-with-portrait">
+      <div class="lead-col">
+        <p class="lead">
+          Ich bin Ralf Meier. Ich arbeite in Bremen in Product Operations &amp; DX
+          Design – mit dem Entwickler als Kunden. Was mich antreibt, hat aber
+          weniger mit Technologie zu tun als mit der Frage, wie Menschen in ihrer
+          Arbeit wachsen.
+        </p>
+        <dl class="facts">
+          <div class="fact">
+            <dt>Rolle</dt>
+            <dd>DX Design</dd>
+          </div>
+          <div class="fact">
+            <dt>Schwerpunkt</dt>
+            <dd>Agentic Engineering</dd>
+          </div>
+          <div class="fact">
+            <dt>Verein</dt>
+            <dd>Bremen eSports e. V.</dd>
+          </div>
+          <div class="fact">
+            <dt>Standort</dt>
+            <dd>Bremen</dd>
+          </div>
+        </dl>
+      </div>
+      <figure class="portrait-fig portrait-inline">
+        <img src="/profile.png" alt="Porträt von Ralf Meier" class="portrait" />
+        <figcaption>flarmei, irgendwo zwischen Code und Kontext</figcaption>
+      </figure>
+    </div>
 
     <div class="prose">
       <p>
-        Ich arbeite in der Softwareentwicklung und beschäftige mich beruflich
-        viel damit, wie Entwickler besser arbeiten können: Tooling, Prozesse
-        und die kleinen Reibungen, die sich über den Tag summieren.
+        Beruflich begleite ich Entwicklungsteams dabei, neue Technologien
+        wirklich zu adaptieren – nicht nur auszurollen. Gerade bedeutet das vor
+        allem: Agentic Engineering in die Organisation bringen. Schulungen,
+        Gespräche, Metriken, viel Überzeugungsarbeit. Der technische Teil ist
+        dabei meistens der einfachere.
       </p>
       <p>
-        KI interessiert mich nicht wegen des Hypes. Ich betreibe einen eigenen
-        Home-Server, lasse Modelle lokal laufen und baue Sachen damit, die mir
-        das Leben einfacher machen.
+        KI interessiert mich auch privat – ich betreibe einen Home-Server,
+        lasse Modelle lokal laufen und baue Sachen, die mir das Leben einfacher
+        machen. Zwischen Idee und Prototyp liegen bei mir
+        meistens ein paar Stunden, kein Projektplan.
       </p>
       <p>
-        Ehrenamtlich bin ich im Esports aktiv: Vereinsarbeit, Strukturen
-        aufbauen, Leute zusammenbringen. Das ist manchmal mühsam und meistens
-        befriedigend.
+        Ehrenamtlich bin ich Vorstand bei Bremen eSports. Was ich dort gelernt
+        habe, überrascht mich manchmal selbst: Vereinsarbeit ist eines der
+        besten Führungstrainings, das ich kenne. Kein Budget, keine Hierarchie –
+        nur Überzeugung und Vertrauen.
       </p>
       <p>
-        Über persönliches Wachstum schreibe ich, weil ich selbst viel davon
-        lese und selten etwas finde, das nicht nach Ratgeber klingt. Ich
-        versuche es anders.
+        Selbstreflexion ist kein Hobby für mich, sie ist wie ich denke. Dieser
+        Blog ist ein Teil davon. Kein Redaktionsplan, keine Moral am Schluss.
       </p>
-      <p>Hier schreibe ich, was mich gerade beschäftigt. Kein Redaktionsplan.</p>
+    </div>
+
+    <div class="about-topics">
+      <span class="micro">Themen</span>
+      <div class="about-tags">
+        <span class="tag">Agentic Engineering</span>
+        <span class="tag">Developer Experience</span>
+        <span class="tag">Führung</span>
+        <span class="tag">E-Sports</span>
+        <span class="tag">Selbstreflexion</span>
+      </div>
     </div>
   </section>
 </BaseLayout>

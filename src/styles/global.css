@@ -30,7 +30,10 @@ body {
   color: var(--ink);
   font-family: var(--serif);
   font-size: 19px;
-  font-feature-settings: "liga" 1, "onum" 1, "kern" 1;
+  font-feature-settings:
+    "liga" 1,
+    "onum" 1,
+    "kern" 1;
   font-weight: 400;
   line-height: 1.7;
   text-rendering: optimizeLegibility;
@@ -358,14 +361,57 @@ main {
   margin: 2.4rem 0;
 }
 
+.portrait-inline {
+  flex: none;
+  width: 240px;
+  margin: 0;
+}
+
+.portrait-float {
+  float: right;
+  margin: 0.2rem 0 1.2rem 2rem;
+  width: 200px;
+}
+
+.portrait-float::after {
+  display: none;
+}
+
+.lead-with-portrait {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.lead-with-portrait .lead {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.lead-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.lead-col .facts {
+  margin-top: 1.2rem;
+  margin-bottom: 0;
+}
+
 .portrait {
   width: 100%;
   max-width: 360px;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 1 / 1;
   border: 1px solid var(--rule);
   border-radius: 10px;
   filter: grayscale(0.2) contrast(1.02);
   object-fit: cover;
+}
+
+.portrait-inline .portrait,
+.portrait-float .portrait {
+  max-width: 100%;
 }
 
 .portrait-fig figcaption {
@@ -419,22 +465,76 @@ main {
   margin-top: 2.4rem;
 }
 
+.now-foot {
+  margin-top: 2.4rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule-soft);
+}
+
 .now-item {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 0 2rem;
   padding: 1.25rem 0;
   border-top: 1px solid var(--rule-soft);
 }
 
 .now-item h3 {
-  margin: 0 0 0.35rem;
+  margin: 0;
+  padding-top: 0.15rem;
   font-family: var(--mono);
   font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
+  color: var(--ink-faint);
 }
 
 .now-item p {
   margin: 0;
   color: var(--ink-dim);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 2rem;
+  margin: 2rem 0 2.4rem;
+  padding: 1.5rem 1.8rem;
+  background: var(--bg-2);
+  border: 1px solid var(--rule-soft);
+  border-radius: 10px;
+}
+
+.fact dt {
+  margin-bottom: 0.2rem;
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.fact dd {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.about-topics {
+  margin-top: 2.4rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.about-topics .micro {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.2rem;
 }
 
 .progress {
