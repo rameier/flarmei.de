@@ -107,5 +107,27 @@ const { post, nextPost } = Astro.props;
     };
     window.addEventListener("scroll", updateProgress, { passive: true });
     updateProgress();
+
+    const article = document.querySelector(".article");
+    const sidenotes = article?.querySelectorAll("aside.note");
+
+    sidenotes?.forEach((note) => {
+      if (!(note instanceof HTMLElement) || note.dataset.bound === "true") {
+        return;
+      }
+
+      const previous = note.previousElementSibling;
+      if (!(previous instanceof HTMLParagraphElement)) {
+        return;
+      }
+
+      const pair = document.createElement("div");
+      pair.className = "sidenote-pair";
+      pair.dataset.position = note.dataset.position ?? "right";
+
+      previous.before(pair);
+      pair.append(previous, note);
+      note.dataset.bound = "true";
+    });
   </script>
 </BaseLayout>
