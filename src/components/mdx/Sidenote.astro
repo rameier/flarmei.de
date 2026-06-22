@@ -1,12 +1,13 @@
 ---
 interface Props {
   label?: string;
+  position?: "left" | "right";
 }
 
-const { label } = Astro.props;
+const { label, position = "right" } = Astro.props;
 ---
 
-<aside class="note">
+<aside class="note" data-position={position}>
   {label && <span class="note-label">{label}</span>}
   <slot />
 </aside>

@@ -1,0 +1,22 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  caption?: string;
+  sizes?: string;
+}
+
+const {
+  src,
+  alt,
+  caption,
+  sizes = "(max-width: 860px) 100vw, 748px",
+} = Astro.props;
+---
+
+<figure class="image-with-caption">
+  <Image src={src} alt={alt} sizes={sizes} />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

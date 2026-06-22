@@ -1,12 +1,18 @@
 ---
-import { getCollection } from 'astro:content';
-import EmptyWriting from '../components/EmptyWriting.astro';
-import PostRow from '../components/PostRow.astro';
-import TopicTag from '../components/TopicTag.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { estimateReadMinutes, formatDate, getPostSlug, sortPosts } from '../lib/posts';
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import EmptyWriting from "../components/EmptyWriting.astro";
+import PostRow from "../components/PostRow.astro";
+import TopicTag from "../components/TopicTag.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  estimateReadMinutes,
+  formatDate,
+  getPostSlug,
+  sortPosts,
+} from "../lib/posts";
 
-const posts = sortPosts(await getCollection('blog'));
+const posts = sortPosts(await getCollection("blog"));
 const [lead, ...rest] = posts;
 ---
 
@@ -27,24 +33,45 @@ const [lead, ...rest] = posts;
       <>
         <article class="featured fade">
           <div class="fmark micro">Neuester Text</div>
-          <div>
-            <TopicTag topic={lead.data.topic} />
-            <h2>
-              <a href={`/blog/${getPostSlug(lead)}`}>{lead.data.title}</a>
-            </h2>
-          </div>
-          <div>
-            <p class="fdek">{lead.data.description}</p>
-            <div class="fmeta">
-              <span class="micro">{formatDate(lead.data.pubDate)}</span>
-              <span class="rread mono">{estimateReadMinutes(lead)} min lesen</span>
-      <a class="mono read-link" href={`/blog/${getPostSlug(lead)}`}>Lesen -&gt;</a>
+          <div class="featured-body">
+            <div class="featured-main">
+              <TopicTag topic={lead.data.topic} />
+              <h2>
+                <a href={`/blog/${getPostSlug(lead)}`}>{lead.data.title}</a>
+              </h2>
+              <p class="fdek">{lead.data.description}</p>
+              <div class="fmeta">
+                <span class="micro">{formatDate(lead.data.pubDate)}</span>
+                <span class="rread mono">{estimateReadMinutes(lead)} min</span>
+                <a class="mono read-link" href={`/blog/${getPostSlug(lead)}`}>
+                  Lesen -&gt;
+                </a>
+              </div>
             </div>
+
+            {lead.data.heroImage && (
+              <a
+                class="featured-thumb"
+                href={`/blog/${getPostSlug(lead)}`}
+                aria-label={lead.data.title}
+              >
+                <Image
+                  src={lead.data.heroImage}
+                  alt={lead.data.heroImageAlt ?? lead.data.title}
+                  width={640}
+                  height={360}
+                  fit="cover"
+                  sizes="(max-width: 860px) 100vw, 260px"
+                />
+              </a>
+            )}
           </div>
         </article>
         <hr class="hairline" />
         <section class="post-list" aria-label="Weitere Texte">
-          {rest.map((post) => <PostRow post={post} />)}
+          {rest.map((post) => (
+            <PostRow post={post} />
+          ))}
         </section>
       </>
     ) : (
