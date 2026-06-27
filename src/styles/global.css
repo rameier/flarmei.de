@@ -215,8 +215,8 @@ main {
 .featured-body {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 260px;
-  align-items: start;
-  gap: 1.4rem;
+  align-items: center;
+  gap: 3.2rem;
 }
 
 .featured-main {
@@ -234,6 +234,8 @@ main {
   font-weight: 300;
   letter-spacing: 0;
   line-height: 1.05;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .featured h2 a:hover {

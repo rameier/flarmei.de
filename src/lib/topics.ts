@@ -1,5 +1,5 @@
 export const topics = {
-  agentic: { key: "agentic", label: "Agentisches Engineering" },
+  agentic: { key: "agentic", label: "Agentic Engineering" },
   devex: { key: "devex", label: "Developer Experience" },
   leadership: { key: "leadership", label: "Führung" },
   esports: { key: "esports", label: "E-Sports" },
