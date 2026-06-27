@@ -1,0 +1,20 @@
+---
+interface Props {
+  instruction: string;
+  questions: string[];
+}
+
+const { instruction, questions } = Astro.props;
+---
+
+<figure class="instruction-breakdown">
+  <div class="instruction">
+    <span class="diagram-label">Die Anweisung</span>
+    <strong>{instruction}</strong>
+  </div>
+  <div class="breakdown-arrow" aria-hidden="true">&darr;</div>
+  <figcaption class="diagram-label">Was dabei offenbleibt</figcaption>
+  <ul>
+    {questions.map((question) => <li>{question}</li>)}
+  </ul>
+</figure>
