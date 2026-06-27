@@ -1,17 +1,26 @@
 ---
-title: "Die neue Programmiersprache heißt Klarheit"
+title: "Meine neue Programmiersprache heißt Klarheit"
 description: "Warum KI Softwareentwicklung nicht entzaubert, sondern den eigentlichen Kern der Arbeit sichtbarer macht: Probleme verstehen, Wissen strukturieren und Gedanken klar formulieren."
 pubDate: 2026-06-27
 topic: agentic
+heroImage: ../../assets/blog/programmieren-klarheit.png
+heroImageAlt: "Illustrierte Taschenlampe im Nebel auf dunklem Hintergrund"
 ---
 
-Vor ein paar Tagen bin ich über einen Satz gestolpert, der mich seitdem nicht mehr so richtig loslässt.
+import Callout from "../../components/mdx/Callout.astro";
+import PullQuote from "../../components/mdx/PullQuote.astro";
+import AbstractionStack from "../../components/mdx/AbstractionStack.astro";
+import InstructionBreakdown from "../../components/mdx/InstructionBreakdown.astro";
+import KnowledgeGap from "../../components/mdx/KnowledgeGap.astro";
+import Sidenote from "../../components/mdx/Sidenote.astro";
 
-> The new programming language is clarity.
+Gestern Abend auf dem Sofa, mitten in Rainer Stropeks TED Talk [_What to teach when AI writes the code_](https://www.youtube.com/watch?v=yhGzXULZkEw) – und plötzlich dieser eine Satz, den ich seitdem nicht mehr loswerde.
 
-Gesagt hat ihn Rainer Stropek in einem TED Talk mit dem Titel *What to teach when AI writes the code*.
+<PullQuote attribution="Rainer Stropek">
+  My new programming language is clarity.
+</PullQuote>
 
-Und ich glaube, der Satz trifft mich gerade deshalb so sehr, weil er an mehreren Stellen gleichzeitig andockt. An meiner Arbeit. An meinem Verständnis von Softwareentwicklung. An meiner aktuellen Beschäftigung mit KI. Und an dieser ziemlich grundlegenden Frage, was eigentlich von meinem Beruf übrig bleibt, wenn KI irgendwann immer besser darin wird, Code zu schreiben.
+Der Satz trifft mich gerade deshalb so sehr, weil er an mehreren Stellen gleichzeitig andockt. An meiner Arbeit. An meinem Verständnis von Softwareentwicklung. An meiner aktuellen Beschäftigung mit KI. Und an dieser ziemlich grundlegenden Frage, was eigentlich von meinem Beruf übrig bleibt, wenn KI irgendwann immer besser darin wird, Code zu schreiben.
 
 ## Die Angst vor der falschen Frage
 
@@ -63,19 +72,17 @@ Klingt erstmal simpel.
 
 Bis man merkt, wie viele Annahmen in so einer simplen Handlung stecken.
 
-*Nimm den Toast.*
-
-Welchen Toast?
-
-Mit welcher Hand?
-
-Ist die Verpackung schon offen?
-
-Wo liegt das Messer?
-
-Ist das Glas Marmelade schon aufgeschraubt?
-
-Was bedeutet eigentlich „schmieren“?
+<InstructionBreakdown
+  instruction="Nimm den Toast."
+  questions={[
+    "Welchen Toast?",
+    "Mit welcher Hand?",
+    "Ist die Verpackung schon offen?",
+    "Wo liegt das Messer?",
+    "Ist das Glas Marmelade schon aufgeschraubt?",
+    "Was bedeutet eigentlich „schmieren“?",
+  ]}
+/>
 
 Die Übung hat ziemlich schnell gezeigt, wie schwer es ist, eine scheinbar einfache Handlung so präzise zu beschreiben, dass jemand anderes sie wirklich exakt ausführen kann.
 
@@ -105,6 +112,13 @@ Das klingt erstmal banal. Ist es aber nicht.
 
 Denn in vielen Teams war Unklarheit schon vorher ein Problem. KI macht sie nur sichtbarer.
 
+<Callout label="Die Falle">
+Weil KI immer eine gut klingende Antwort produziert, ist die Versuchung groß, eine gut klingende Antwort mit einer guten Antwort zu verwechseln. Vorgetäuschte Klarheit. Faulheit mit gutem Gewissen.
+
+Das ist Gift. Denn wir treffen die Entscheidungen, nicht unser Werkzeug. Routinearbeit und Umsetzung lassen sich automatisieren – Entscheidung und Verantwortung nicht.
+
+</Callout>
+
 ## Weniger Reibung, mehr Fokus
 
 Was ich aktuell in meinem Arbeitsalltag beobachte, ist nicht, dass KI uns das Denken abnimmt.
@@ -132,6 +146,12 @@ Und wenn ein Ansatz nicht funktioniert, tut es weniger weh, ihn zu verwerfen. We
 
 Dadurch wird Experimentieren günstiger.
 
+<Sidenote label="Ausprobiert">
+  Allein für eine Idee aus meinem Verein habe ich bestimmt fünf Prototypen
+  gebaut: Teammanagement, Discord-Automatisierungen und mehr. Coole Ideen – nur
+  wollte sie am Ende niemand benutzen.
+</Sidenote>
+
 Und wenn Experimentieren günstiger wird, verändert sich auch die Art, wie man denkt.
 
 ## Dokumentation wird plötzlich wertvoller
@@ -152,13 +172,15 @@ Annahmen sichtbar machen.
 
 Gerade in Organisationen gibt es unglaublich viel Wissen, das nirgendwo steht.
 
-„Frag mal Peter.“
-
-„Das weiß Lisa.“
-
-„Das ist historisch gewachsen.“
-
-„Das haben wir damals so entschieden, aber ich weiß nicht mehr genau warum.“
+<KnowledgeGap
+  voices={[
+    "Frag mal Peter.",
+    "Das weiß Lisa.",
+    "Das ist historisch gewachsen.",
+    "Das haben wir damals so entschieden, aber ich weiß nicht mehr genau warum.",
+  ]}
+  conclusion="Kontext, der nur in Köpfen existiert"
+/>
 
 Solange Menschen miteinander arbeiten, funktioniert das irgendwie. Nicht gut, aber irgendwie.
 
@@ -176,23 +198,42 @@ Sondern weil sie darauf angewiesen ist, dass wir unser Wissen besser zugänglich
 
 ## Der Compiler hat uns auch nicht ersetzt
 
-Ich musste dabei auch an ein Interview mit Linus Torvalds denken.
+[Linus Torvalds brachte das in einem Interview](https://www.youtube.com/watch?v=fi29pfLcW4I) auf den Punkt:
 
-Sinngemäß ging es darum, dass Entwickler heute schon lange keinen Maschinencode mehr schreiben. Das erledigen Compiler für uns.
+> "100% of their code is written by compilers. But they never say that."
 
-Und trotzdem gibt es weiterhin Softwareentwickler.
+Wer sagt, 99% seines Codes werde von KI geschrieben, übersieht: 100% des Codes wurde schon immer von Compilern geschrieben. Und trotzdem gibt es weiterhin Softwareentwickler.
 
 Eigentlich besteht die Geschichte der Softwareentwicklung aus immer neuen Abstraktionsebenen.
 
-Maschinencode.
-Assembler.
-C.
-Java.
-Frameworks.
-Libraries.
-Low-Code.
-Copilot.
-Agentic AI.
+<AbstractionStack
+  layers={[
+    {
+      name: "Agentic AI",
+      detail: "Ziele beschreiben statt jeden Schritt vorzugeben",
+    },
+    {
+      name: "KI-Assistenten",
+      detail: "Absichten in konkrete Codevorschläge übersetzen",
+    },
+    {
+      name: "Frameworks & Libraries",
+      detail: "Auf fertigen Bausteinen aufbauen",
+    },
+    {
+      name: "Hochsprachen",
+      detail: "Logik statt Prozessorbefehle formulieren",
+    },
+    {
+      name: "Assembler",
+      detail: "Lesbare Namen für Maschinenbefehle verwenden",
+    },
+    {
+      name: "Maschinencode",
+      detail: "Die Befehle, die der Prozessor ausführt",
+    },
+  ]}
+/>
 
 Jede Ebene nimmt uns einen Teil der direkten Übersetzungsarbeit ab.
 
@@ -216,21 +257,20 @@ Wenn KI immer besser Code schreibt, bleibt nicht nichts übrig.
 
 Es bleibt das, was vorher vielleicht nur weniger sichtbar war.
 
-Probleme verstehen.
+Ich erlebe das inzwischen fast täglich. Ein Beispiel: der sogenannte „[Grill-Me-Skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md)“ – ein kleines Werkzeug, das einen KI-Agenten dazu bringt, so lange nachzufragen, bis er sicher ist, dasselbe Verständnis des Problems zu haben wie du. Kein Code. Keine Lösung. Erst Klarheit. _It's just as simple as that._
 
-Gute Fragen stellen.
+<Sidenote label="BTW" position="left">
+  Genau dieser Grill-Me-Skill hat mich auch bei der Gestaltung dieses Artikels
+  so lange mit Fragen gelöchert, bis die Richtung klar war.
+</Sidenote>
 
-Anforderungen klären.
+Oder der Kollege, der vorletzte Woche zu mir kam, frustriert über eine Dokumentation, die einfach nicht stimmen wollte. Er war kurz davor, sich einen halben Tag Urlaub zu nehmen. Was ihn am Ende weitergebracht hat, war nicht mehr Code – sondern Klarheit. Er hat das Problem so lange umformuliert, hinterfragt und neu beschrieben, bis die KI mit ihm zusammen zu einem Ergebnis fand, das er sich kaum hätte träumen lassen.
 
-Zusammenhänge erkennen.
+Was also bleibt, wenn KI den Code schreibt?
 
-Lösungen bewerten.
+Das Denken. Das Fragen. Das Entscheiden.
 
-Qualität beurteilen.
-
-Verantwortung übernehmen.
-
-Und vielleicht vor allem: entscheiden, was überhaupt gebaut werden sollte.
+Und vielleicht vor allem: die Verantwortung dafür, was überhaupt entstehen soll.
 
 Das sind keine Nebentätigkeiten von Softwareentwicklung.
 
@@ -259,3 +299,5 @@ Vielleicht ist sie nur der Moment, in dem sichtbarer wird, was gute Softwareentw
 Nicht Code schreiben.
 
 Sondern Gedanken so klar formulieren, dass aus einer Idee Wirklichkeit werden kann.
+
+Und vielleicht gilt das weit über Softwareentwicklung hinaus. KI hilft mir näher zu mir und zu dem zu finden, was ich sein möchte. Aber ich muss es auch zulassen.

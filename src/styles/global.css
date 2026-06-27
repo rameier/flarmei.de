@@ -854,6 +854,312 @@ main {
   color: var(--ink-dim);
 }
 
+.callout-label {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  text-transform: uppercase;
+}
+
+.article .callout > :first-child:not(.callout-label),
+.article .callout .callout-label + p {
+  margin-top: 0;
+}
+
+.article .callout > :last-child {
+  margin-bottom: 0;
+}
+
+.article .pull-quote {
+  margin: 2.8rem 0 3.2rem;
+}
+
+.article .pull-quote blockquote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.article .pull-quote blockquote p {
+  max-width: 12ch;
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(2.35rem, 8vw, 4.3rem);
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+
+.article .pull-quote blockquote p::before {
+  color: var(--accent);
+  content: "“";
+  margin-left: -0.48em;
+}
+
+.article .pull-quote figcaption {
+  margin-top: 1rem;
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  text-transform: uppercase;
+}
+
+.article .abstraction-stack {
+  margin: 2rem 0 2.2rem;
+}
+
+.article .abstraction-stack figcaption {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.article .abstraction-stack ol {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.article .abstraction-stack li {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.75fr) 1.6fr;
+  gap: 1rem;
+  margin-inline: var(--layer-inset);
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--rule-soft);
+  background: var(--bg-inset);
+}
+
+.article .abstraction-stack li:first-child {
+  border-color: var(--accent-dim);
+  background: oklch(0.245 0.025 42 / 0.65);
+}
+
+.article .abstraction-stack strong {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.article .abstraction-stack li:first-child strong {
+  color: var(--accent);
+}
+
+.article .abstraction-stack li span {
+  color: var(--ink-dim);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.article .abstraction-stack .stack-caption {
+  margin: 0.7rem 0 0;
+  color: var(--ink-faint);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.article .diagram-label {
+  display: block;
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.article .instruction-breakdown {
+  margin: 2rem 0 2.2rem;
+  padding: 1.2rem;
+  border: 1px solid var(--rule-soft);
+  background: var(--bg-inset);
+}
+
+.article .instruction-breakdown .instruction {
+  padding: 0.4rem 0 1.1rem;
+  text-align: center;
+}
+
+.article .instruction-breakdown .instruction strong {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.article .instruction-breakdown .breakdown-arrow {
+  width: 1px;
+  height: 1.8rem;
+  margin: 0 auto 1.1rem;
+  background: var(--accent-dim);
+  color: transparent;
+}
+
+.article .instruction-breakdown figcaption {
+  margin-bottom: 0.65rem;
+  text-align: center;
+}
+
+.article .instruction-breakdown ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.article .instruction-breakdown li {
+  margin: 0;
+  padding: 0.42rem 0.65rem;
+  border: 1px solid var(--rule-soft);
+  border-radius: 999px;
+  color: var(--ink-dim);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.article .knowledge-gap {
+  width: calc(100% + 6rem);
+  margin: 2.4rem -3rem 2.7rem;
+  padding: 1.35rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 100%, oklch(0.7 0.105 42 / 0.09), transparent 42%),
+    var(--bg-inset);
+}
+
+.article .knowledge-gap-header {
+  max-width: 32rem;
+  margin: 0 auto 1.35rem;
+  text-align: center;
+}
+
+.article .knowledge-gap-header strong {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(1.45rem, 4vw, 2rem);
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.article .knowledge-gap ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.article .knowledge-gap li {
+  position: relative;
+  margin: 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--rule-soft);
+  border-radius: 6px;
+  background: var(--bg-2);
+  color: var(--ink-dim);
+  font-size: 0.92rem;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.article .knowledge-gap li::after {
+  position: absolute;
+  bottom: -6px;
+  left: 1.2rem;
+  width: 10px;
+  height: 10px;
+  border-right: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--rule-soft);
+  background: var(--bg-2);
+  content: "";
+  transform: rotate(45deg);
+}
+
+.article .knowledge-gap li:nth-child(even) {
+  transform: translateY(0.45rem);
+}
+
+.article .knowledge-connector {
+  width: 1px;
+  height: 2.8rem;
+  margin: 1.2rem auto 0;
+  background: linear-gradient(var(--rule), var(--accent-dim));
+}
+
+.article .knowledge-gap figcaption {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--accent-dim);
+  border-radius: 6px;
+  background: oklch(0.245 0.035 42 / 0.7);
+  text-align: center;
+}
+
+.article .knowledge-gap figcaption strong {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+@media (max-width: 860px) {
+  .article .knowledge-gap {
+    width: auto;
+    margin-inline: 0;
+  }
+}
+
+@media (max-width: 620px) {
+  .article .pull-quote blockquote p::before {
+    margin-left: 0;
+  }
+
+  .article .abstraction-stack li {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+    margin-inline: calc(var(--layer-inset) * 0.3);
+  }
+
+  .article .knowledge-gap ul {
+    grid-template-columns: 1fr;
+  }
+
+  .article .knowledge-gap {
+    width: auto;
+    margin-inline: 0;
+    padding: 1rem;
+  }
+
+  .article .knowledge-gap li:nth-child(even) {
+    transform: none;
+  }
+}
+
 .post-nav {
   margin-top: 3.5rem;
 }
