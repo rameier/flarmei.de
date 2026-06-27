@@ -40,7 +40,7 @@ Required fields:
 
 ## Topic Keys
 
-- `agentic` - Agentisches Engineering
+- `agentic` - Agentic Engineering
 - `devex` - Developer Experience
 - `leadership` - Führung
 - `esports` - E-Sports

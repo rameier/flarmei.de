@@ -1,0 +1,28 @@
+---
+interface Props {
+  voices: string[];
+  conclusion: string;
+  title?: string;
+}
+
+const {
+  voices,
+  conclusion,
+  title = "Alle wissen etwas. Niemand hat den ganzen Kontext.",
+} = Astro.props;
+---
+
+<figure class="knowledge-gap">
+  <div class="knowledge-gap-header">
+    <span class="diagram-label">Implizites Wissen</span>
+    <strong>{title}</strong>
+  </div>
+  <ul aria-label="Typische Aussagen über implizites Wissen">
+    {voices.map((voice) => <li>&bdquo;{voice}&ldquo;</li>)}
+  </ul>
+  <div class="knowledge-connector" aria-hidden="true"></div>
+  <figcaption>
+    <span class="diagram-label">Was dem System fehlt</span>
+    <strong>{conclusion}</strong>
+  </figcaption>
+</figure>
