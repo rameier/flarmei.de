@@ -11,12 +11,18 @@ interface Props {
 }
 
 const { post, nextPost } = Astro.props;
+const socialImage = post.data.heroImage
+  ? new URL(post.data.heroImage.src, Astro.site).toString()
+  : new URL("/social-preview.svg", Astro.site).toString();
 ---
 
 <BaseLayout
   title={`${post.data.title} - flarmei.de`}
   description={post.data.description}
   type="article"
+  image={socialImage}
+  imageAlt={post.data.heroImageAlt ?? post.data.title}
+  publishedTime={post.data.pubDate.toISOString()}
 >
   <div class="progress" data-progress></div>
   <article class="fade">
