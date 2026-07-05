@@ -4,6 +4,7 @@ import EmptyWriting from '../../components/EmptyWriting.astro';
 import PostRow from '../../components/PostRow.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { sortPosts } from '../../lib/posts';
+import { breadcrumbSchema } from '../../lib/schema';
 import { topicOrder, topics, type TopicKey } from '../../lib/topics';
 
 export function getStaticPaths() {
@@ -14,15 +15,21 @@ export function getStaticPaths() {
 }
 
 const { topic } = Astro.props as { topic: TopicKey };
-const posts = sortPosts(await getCollection('blog')).filter(
-  (post) => post.data.topic === topic,
-);
+const posts = sortPosts(await getCollection('blog')).filter((post) => post.data.topic === topic);
 const label = topics[topic].label;
+const structuredData = [
+  breadcrumbSchema([
+    { name: 'Home', url: new URL('/', Astro.site).toString() },
+    { name: 'Blog', url: new URL('/blog/', Astro.site).toString() },
+    { name: label, url: Astro.url.href },
+  ]),
+];
 ---
 
 <BaseLayout
   title={`${label} - flarmei.de`}
   description={`Texte von Ralf Meier zum Thema ${label}.`}
+  structuredData={structuredData}
 >
   <header class="page-head fade">
     <span class="micro">Thema</span>
@@ -32,7 +39,9 @@ const label = topics[topic].label;
   {
     posts.length ? (
       <section class="post-list" aria-label={`Texte zu ${label}`}>
-        {posts.map((post) => <PostRow post={post} />)}
+        {posts.map((post) => (
+          <PostRow post={post} />
+        ))}
       </section>
     ) : (
       <EmptyWriting />

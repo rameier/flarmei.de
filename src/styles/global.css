@@ -1,3 +1,5 @@
+@import './fonts.css';
+
 :root {
   --bg: oklch(0.205 0.012 250);
   --bg-2: oklch(0.245 0.014 250);
@@ -9,8 +11,8 @@
   --rule-soft: oklch(0.278 0.012 250);
   --accent: oklch(0.7 0.105 42);
   --accent-dim: oklch(0.62 0.085 42);
-  --serif: "Spectral", Georgia, serif;
-  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --serif: 'Spectral', Georgia, serif;
+  --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   --wrap: 748px;
 }
 
@@ -31,9 +33,9 @@ body {
   font-family: var(--serif);
   font-size: 19px;
   font-feature-settings:
-    "liga" 1,
-    "onum" 1,
-    "kern" 1;
+    'liga' 1,
+    'onum' 1,
+    'kern' 1;
   font-weight: 400;
   line-height: 1.7;
   text-rendering: optimizeLegibility;
@@ -73,7 +75,7 @@ main {
 
 .mono {
   font-family: var(--mono);
-  font-feature-settings: "liga" 0;
+  font-feature-settings: 'liga' 0;
   font-weight: 400;
 }
 
@@ -157,6 +159,27 @@ main {
   padding: 2.5rem 0 4rem;
 }
 
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.socials a {
+  color: var(--ink-faint);
+  transition: color 0.2s ease;
+}
+
+.socials a:hover {
+  color: var(--accent);
+}
+
+.socials svg {
+  display: block;
+  width: 17px;
+  height: 17px;
+}
+
 .tag {
   display: inline-flex;
   align-items: center;
@@ -174,7 +197,7 @@ main {
   flex: none;
   border-radius: 50%;
   background: var(--accent);
-  content: "";
+  content: '';
   opacity: 0.85;
 }
 
@@ -898,7 +921,7 @@ main {
 
 .article .pull-quote blockquote p::before {
   color: var(--accent);
-  content: "“";
+  content: '“';
   margin-left: -0.48em;
 }
 
@@ -1095,7 +1118,7 @@ main {
   border-right: 1px solid var(--rule-soft);
   border-bottom: 1px solid var(--rule-soft);
   background: var(--bg-2);
-  content: "";
+  content: '';
   transform: rotate(45deg);
 }
 
@@ -1129,10 +1152,118 @@ main {
   font-weight: 400;
 }
 
+.article .bottleneck-shift {
+  margin: 2.2rem 0 2.4rem;
+}
+
+.article .bottleneck-shift > figcaption {
+  margin-bottom: 1.1rem;
+}
+
+.article .bottleneck-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 1.7rem;
+}
+
+.article .bottleneck-row {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  align-items: center;
+  gap: 0.4rem 1rem;
+}
+
+.article .bottleneck-row .row-label {
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.article .bottleneck-row .pipe {
+  --pinch: 50%;
+  height: 1.9rem;
+  background: var(--bg-inset);
+  border: 1px solid var(--rule-soft);
+  clip-path: polygon(
+    0 0,
+    calc(var(--pinch) - 7%) 0,
+    var(--pinch) 40%,
+    calc(var(--pinch) + 7%) 0,
+    100% 0,
+    100% 100%,
+    calc(var(--pinch) + 7%) 100%,
+    var(--pinch) 60%,
+    calc(var(--pinch) - 7%) 100%,
+    0 100%
+  );
+}
+
+.article .bottleneck-row .stage-labels {
+  grid-column: 2;
+  display: flex;
+  justify-content: space-between;
+  margin: 0.55rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.article .bottleneck-row .stage-labels li {
+  flex: 1;
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.4;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.article .bottleneck-row .stage-labels li:first-child {
+  text-align: left;
+}
+
+.article .bottleneck-row .stage-labels li:last-child {
+  text-align: right;
+}
+
+.article .bottleneck-row .stage-labels li.is-bottleneck {
+  color: var(--accent);
+  font-weight: 500;
+}
+
 @media (max-width: 860px) {
   .article .knowledge-gap {
     width: auto;
     margin-inline: 0;
+  }
+}
+
+@media (max-width: 620px) {
+  .article .bottleneck-row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .article .bottleneck-row .pipe {
+    min-width: 0;
+  }
+
+  .article .bottleneck-row .stage-labels {
+    grid-column: 1;
+    flex-wrap: wrap;
+    gap: 0.3rem 0.5rem;
+  }
+
+  .article .bottleneck-row .stage-labels li {
+    flex: 1 1 40%;
+    min-width: 0;
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .article .bottleneck-row .stage-labels li:first-child,
+  .article .bottleneck-row .stage-labels li:last-child {
+    text-align: center;
   }
 }
 
@@ -1233,11 +1364,11 @@ main {
     margin: 0;
   }
 
-  .article .sidenote-pair[data-position="right"] > aside.note {
+  .article .sidenote-pair[data-position='right'] > aside.note {
     left: calc(100% + 50px);
   }
 
-  .article .sidenote-pair[data-position="left"] > aside.note {
+  .article .sidenote-pair[data-position='left'] > aside.note {
     right: calc(100% + 50px);
     text-align: right;
   }
@@ -1294,6 +1425,7 @@ main {
   .site-foot {
     align-items: flex-start;
     flex-direction: column;
+    gap: 1.1rem;
   }
 
   .row {

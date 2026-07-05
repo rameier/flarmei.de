@@ -1,0 +1,35 @@
+---
+interface Row {
+  label: string;
+  stages: string[];
+  bottleneckIndex: number;
+}
+
+interface Props {
+  rows: Row[];
+  caption?: string;
+}
+
+const { rows, caption } = Astro.props;
+
+const pinchFor = (row: Row) => ((row.bottleneckIndex + 0.5) / row.stages.length) * 100;
+---
+
+<figure class="bottleneck-shift">
+  {caption && <figcaption class="diagram-label">{caption}</figcaption>}
+  <div class="bottleneck-rows">
+    {
+      rows.map((row) => (
+        <div class="bottleneck-row">
+          <span class="row-label">{row.label}</span>
+          <div class="pipe" style={`--pinch: ${pinchFor(row)}%`} />
+          <ol class="stage-labels">
+            {row.stages.map((stage, index) => (
+              <li class:list={{ 'is-bottleneck': index === row.bottleneckIndex }}>{stage}</li>
+            ))}
+          </ol>
+        </div>
+      ))
+    }
+  </div>
+</figure>

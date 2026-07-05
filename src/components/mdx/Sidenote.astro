@@ -1,10 +1,10 @@
 ---
 interface Props {
   label?: string;
-  position?: "left" | "right";
+  position?: 'left' | 'right';
 }
 
-const { label, position = "right" } = Astro.props;
+const { label, position = 'right' } = Astro.props;
 ---
 
 <aside class="note" data-position={position}>

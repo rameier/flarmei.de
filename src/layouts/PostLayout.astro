@@ -1,9 +1,10 @@
 ---
-import TopicTag from "../components/TopicTag.astro";
-import { Image } from "astro:assets";
-import type { BlogPost } from "../lib/posts";
-import { estimateReadMinutes, formatDate, getPostSlug } from "../lib/posts";
-import BaseLayout from "./BaseLayout.astro";
+import TopicTag from '../components/TopicTag.astro';
+import { Image } from 'astro:assets';
+import type { BlogPost } from '../lib/posts';
+import { estimateReadMinutes, formatDate, getPostSlug } from '../lib/posts';
+import { blogPostingSchema, breadcrumbSchema } from '../lib/schema';
+import BaseLayout from './BaseLayout.astro';
 
 interface Props {
   post: BlogPost;
@@ -13,7 +14,25 @@ interface Props {
 const { post, nextPost } = Astro.props;
 const socialImage = post.data.heroImage
   ? new URL(post.data.heroImage.src, Astro.site).toString()
-  : new URL("/social-preview.svg", Astro.site).toString();
+  : undefined;
+const postUrl = Astro.url.href;
+const modifiedDate = post.data.updatedDate ?? post.data.pubDate;
+
+const structuredData = [
+  blogPostingSchema({
+    url: postUrl,
+    title: post.data.title,
+    description: post.data.description,
+    pubDate: post.data.pubDate,
+    updatedDate: post.data.updatedDate,
+    image: socialImage ?? new URL('/social-preview.png', Astro.site).toString(),
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: new URL('/', Astro.site).toString() },
+    { name: 'Blog', url: new URL('/blog/', Astro.site).toString() },
+    { name: post.data.title, url: postUrl },
+  ]),
+];
 ---
 
 <BaseLayout
@@ -21,8 +40,10 @@ const socialImage = post.data.heroImage
   description={post.data.description}
   type="article"
   image={socialImage}
-  imageAlt={post.data.heroImageAlt ?? post.data.title}
+  imageAlt={socialImage ? post.data.heroImageAlt ?? post.data.title : undefined}
   publishedTime={post.data.pubDate.toISOString()}
+  modifiedTime={modifiedDate.toISOString()}
+  structuredData={structuredData}
 >
   <div class="progress" data-progress></div>
   <article class="fade">
@@ -49,6 +70,7 @@ const socialImage = post.data.heroImage
           width={1600}
           height={900}
           fit="cover"
+          quality={90}
           sizes="(max-width: 860px) 100vw, 748px"
         />
       )
@@ -67,9 +89,9 @@ const socialImage = post.data.heroImage
         <hr class="hairline" />
         <article
           class:list={[
-            "row",
-            "post-nav-row",
-            { "post-nav-row--with-thumb": !!nextPost.data.heroImage },
+            'row',
+            'post-nav-row',
+            { 'post-nav-row--with-thumb': !!nextPost.data.heroImage },
           ]}
         >
           {nextPost.data.heroImage && (
@@ -80,6 +102,7 @@ const socialImage = post.data.heroImage
               width={208}
               height={117}
               fit="cover"
+              quality={90}
               sizes="(max-width: 620px) 100vw, 104px"
             />
           )}
@@ -88,9 +111,7 @@ const socialImage = post.data.heroImage
               <span class="micro">NEXT</span>
             </div>
             <h2 class="rtitle">
-              <a href={`/blog/${getPostSlug(nextPost)}`}>
-                {nextPost.data.title}
-              </a>
+              <a href={`/blog/${getPostSlug(nextPost)}`}>{nextPost.data.title}</a>
             </h2>
             <p class="rdek">{nextPost.data.description}</p>
           </div>
@@ -103,22 +124,22 @@ const socialImage = post.data.heroImage
   }
 
   <script>
-    const bar = document.querySelector("[data-progress]");
+    const bar = document.querySelector('[data-progress]');
     const updateProgress = () => {
       if (!bar) return;
       const doc = document.documentElement;
       const max = doc.scrollHeight - doc.clientHeight;
       const progress = max > 0 ? Math.min(1, doc.scrollTop / max) : 0;
-      bar.setAttribute("style", `width: ${progress * 100}%`);
+      bar.setAttribute('style', `width: ${progress * 100}%`);
     };
-    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener('scroll', updateProgress, { passive: true });
     updateProgress();
 
-    const article = document.querySelector(".article");
-    const sidenotes = article?.querySelectorAll("aside.note");
+    const article = document.querySelector('.article');
+    const sidenotes = article?.querySelectorAll('aside.note');
 
     sidenotes?.forEach((note) => {
-      if (!(note instanceof HTMLElement) || note.dataset.bound === "true") {
+      if (!(note instanceof HTMLElement) || note.dataset.bound === 'true') {
         return;
       }
 
@@ -127,13 +148,13 @@ const socialImage = post.data.heroImage
         return;
       }
 
-      const pair = document.createElement("div");
-      pair.className = "sidenote-pair";
-      pair.dataset.position = note.dataset.position ?? "right";
+      const pair = document.createElement('div');
+      pair.className = 'sidenote-pair';
+      pair.dataset.position = note.dataset.position ?? 'right';
 
       previous.before(pair);
       pair.append(previous, note);
-      note.dataset.bound = "true";
+      note.dataset.bound = 'true';
     });
   </script>
 </BaseLayout>

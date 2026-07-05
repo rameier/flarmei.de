@@ -1,0 +1,147 @@
+---
+title: "KI verschiebt den Engpass"
+description: "Warum KI die Softwareentwicklung nicht schneller, sondern anders macht und weshalb menschliche Fähigkeiten wichtiger werden als technisches Wissen."
+pubDate: 2026-07-05
+topic: agentic
+heroImage: ../../assets/blog/ki-engpass.png
+heroImageAlt: "Flaschenhals auf dunklem Hintergrund"
+---
+
+import PullQuote from "../../components/mdx/PullQuote.astro";
+import Callout from "../../components/mdx/Callout.astro";
+import BottleneckShift from "../../components/mdx/BottleneckShift.astro";
+import Sidenote from "../../components/mdx/Sidenote.astro";
+
+Vor einigen Monaten hätte ich vermutlich gesagt, dass KI Softwareentwickler einfach produktiver macht. Diese Aussage stimmt zwar, sie beschreibt aber nur einen kleinen Teil dessen, was ich gerade beobachte.
+
+Je länger ich mit KI-Agenten arbeite, desto mehr habe ich das Gefühl, dass wir über die falschen Dinge sprechen. Wir diskutieren darüber, welches Modell gerade das beste ist, welcher Coding Agent den saubersten Code schreibt oder welche Benchmarks sich wieder verbessert haben. Das ist spannend, aber für meinen Arbeitsalltag spielt es eine immer kleinere Rolle.
+
+<Sidenote label="Die eigentliche Veränderung">
+  Auch Burke Holland geht in seinem neuesten Video "[10 AI Coding Tips That
+  Actually Work](https://www.youtube.com/watch?v=7hAUbsHox20&t=19s)" genau
+  darauf ein. Es wird zu viel über die technischen Details gesprochen, während
+  die eigentliche Veränderung in der Art und Weise liegt, wie wir Software
+  entwickeln.
+</Sidenote>
+
+<PullQuote>
+  KI macht Softwareentwicklung nicht einfach schneller. KI verschiebt den
+  Engpass.
+</PullQuote>
+
+Dieser Gedanke hat mich in den letzten Monaten immer wieder beschäftigt, weil ich ihn sowohl in unserer Produktentwicklung als auch in Kundenprojekten beobachte. Früher war ziemlich klar, wodurch unsere Geschwindigkeit begrenzt wurde. Es gab mehr Anforderungen als Entwicklungskapazität. Backlogs waren voll, Roadmaps länger als ein Jahr und ständig musste entschieden werden, welche Features zuerst umgesetzt werden. Die eigentliche Umsetzung war teuer. Jede neue Funktion bedeutete Entwicklungsaufwand, Tests, Reviews und später auch Wartung. Dass Ideen lange im Backlog lagen, war deshalb völlig normal.
+
+Heute fühlt sich diese Realität zum ersten Mal anders an.
+
+## Wenn Implementierung plötzlich günstig wird
+
+Ich merke das mittlerweile fast täglich. Aufgaben, für die ich früher mehrere Stunden oder sogar Tage eingeplant hätte, entstehen heute oft innerhalb weniger Minuten als erster Entwurf. Natürlich ist dieser Entwurf selten perfekt. Er muss überprüft, angepasst und manchmal auch komplett verworfen werden. Trotzdem hat sich etwas Grundlegendes verändert: Der eigentliche Akt des Programmierens verliert seinen Status als knappste Ressource.
+
+Software zu schreiben fühlt sich manchmal fast wie ein Fingerschnippen an.
+
+<Sidenote label="Blitzschnell" position="left">
+  Für mich ist es gar kein Problem mehr, innerhalb von wenigen Stunden einen
+  neuen Prototypen auf die Beine zu stellen. Früher hätte ich dafür mehrere Tage
+  eingeplant. Oder es gar nicht erst beendet.
+</Sidenote>
+
+Damit verschwindet die Arbeit allerdings nicht. Sie wandert nur an eine andere Stelle. Während ich früher einen großen Teil meiner Zeit damit verbracht habe, Lösungen zu implementieren, verbringe ich heute deutlich mehr Zeit damit, überhaupt herauszufinden, welche Lösung die richtige ist. Bevor ein Agent die erste Zeile Code schreibt, möchte ich verstanden haben, welches Problem wir eigentlich lösen, welche Architektur betroffen ist, welche Randbedingungen gelten und welche Entscheidungen bereits getroffen wurden. Je klarer ich diese Fragen beantworten kann, desto besser wird das Ergebnis.
+
+Früher war ich oft versucht, einfach loszulegen und unterwegs nachzudenken. Heute fühlt sich genau das ineffizient an. Nicht weil KI langsamer wäre, sondern weil jeder unklare Gedanke später mit derselben Geschwindigkeit vervielfältigt wird.
+
+## Vom Programmieren zum Entscheiden
+
+Wenn ich heute auf meinen eigenen Arbeitsalltag schaue, programmiere ich wahrscheinlich weniger als jemals zuvor. Gleichzeitig denke ich mehr über Softwareentwicklung nach als jemals zuvor.
+
+Das klingt zunächst widersprüchlich.
+
+In Wirklichkeit verschiebt sich nur der Schwerpunkt meiner Arbeit. Früher musste ich überlegen, wie ich eine Idee technisch umsetze. Heute muss ich deutlich häufiger entscheiden, ob die Idee überhaupt sinnvoll ist, welche Auswirkungen sie auf die bestehende Architektur hat und welche Informationen ein Agent benötigt, damit er möglichst selbstständig arbeiten kann.
+
+Ich verbringe mehr Zeit mit Planung, mehr Zeit mit Architekturentscheidungen und deutlich mehr Zeit damit, verschiedene Lösungsansätze gegeneinander abzuwägen. Der Code selbst entsteht anschließend erstaunlich schnell.
+
+Vielleicht erklärt das auch, warum ich heute für die kleinsten Details um Entscheidungen gebeten werde. Jeder Agent arbeitet nur innerhalb der Leitplanken, die ich vorher definiert habe. Fehlen diese Leitplanken, produziert er trotzdem Ergebnisse – aber eben nicht zwangsläufig die richtigen.
+
+<Sidenote label="Falsch abgebogen">
+  Ich glaube, jeder der schon mal mit KI-Agenten gearbeitet hat, kennt das
+  Gefühl, wenn der Agent komplett in die falsche Richtung läuft und man am
+  liebsten die Hände vor dem Kopf schlagen möchte.
+</Sidenote>
+
+<BottleneckShift
+  rows={[
+    {
+      label: "Früher",
+      stages: ["Anforderungen", "Entscheidung", "Umsetzung", "Ergebnis"],
+      bottleneckIndex: 2,
+    },
+    {
+      label: "Heute",
+      stages: ["Anforderungen", "Entscheidung", "Umsetzung", "Ergebnis"],
+      bottleneckIndex: 1,
+    },
+  ]}
+/>
+
+Der Engpass ist deshalb nicht verschwunden.
+
+Er hat nur seine Position gewechselt.
+
+## Agentic Engineering fühlt sich überraschend vertraut an
+
+Irgendwann ist mir aufgefallen, warum sich diese neue Arbeitsweise gar nicht so fremd anfühlt. Eigentlich programmiere ich gar nicht mehr ausschließlich. Ich delegiere.
+
+Früher habe ich Aufgaben an Kollegen abgegeben. Heute delegiere ich zusätzlich an KI-Agenten. Die grundlegenden Prinzipien unterscheiden sich dabei erstaunlich wenig. In beiden Fällen muss ich ein Ziel formulieren, den notwendigen Kontext mitgeben, Erwartungen definieren und erklären, wann Rückfragen sinnvoll sind. Wer schon einmal einen neuen Kollegen eingearbeitet oder fachlich geführt hat, kennt genau diese Situation.
+
+Vielleicht ist das der Grund, warum ich Agentic Engineering inzwischen viel weniger als technisches Thema betrachte. Natürlich helfen gute Prompts, passende Tools oder leistungsfähigere Modelle. Wirklich entscheidend ist aber etwas anderes: **Kommunikation**.
+
+Ein Agent kann nur mit dem arbeiten, was ich ihm mitteile. [Unklare Anforderungen führen zu unklaren Ergebnissen](/blog/meine-neue-programmiersprache-heisst-klarheit) – das gilt für Kollegen genauso wie für Agenten. Fehlender Kontext führt zu falschen Entscheidungen. Und genau deshalb gewinnen Fähigkeiten an Bedeutung, die früher häufig als Soft Skills bezeichnet wurden. Gute Kommunikation, saubere Dokumentation und die Fähigkeit, Probleme wirklich zu verstehen, werden zunehmend zum eigentlichen Wettbewerbsvorteil.
+
+## Dokumentation wird plötzlich wertvoll
+
+Diese Veränderung zeigt sich besonders deutlich beim Thema Dokumentation. Lange Zeit wurde Dokumentation häufig erst dann geschrieben, wenn andere Menschen sie benötigten. Entsprechend wurde sie oft vernachlässigt oder erst am Ende eines Projekts ergänzt.
+
+Mit KI verändert sich ihre Rolle grundlegend. [Dass implizites Wissen zum Flaschenhals wird, hatte ich letzte Woche schon aus einer anderen Richtung beschrieben](/blog/meine-neue-programmiersprache-heisst-klarheit). Neu ist, wer diese Dokumentation heute tatsächlich liest.
+
+Nicht mehr nur Entwickler, sondern vor allem Agenten.
+
+<Callout label="Aktiver Kontext">
+  Architekturentscheidungen, ADRs, Coding Guidelines oder Projekthintergründe
+  sind plötzlich kein passiver Wissensspeicher mehr. Sie werden zum aktiven
+  Kontext, auf dessen Grundlage Entscheidungen getroffen werden. Alles, was nur
+  in den Köpfen einzelner Entwickler existiert, kann ein Agent nicht
+  berücksichtigen. Dadurch wird Wissen, das bisher implizit war, zu einem echten
+  Engpass.
+</Callout>
+
+Ich glaube deshalb, dass wir Dokumentation künftig nicht mehr als Pflichtaufgabe betrachten werden. Sie wird zu einem Teil unserer Entwicklungsumgebung.
+
+## Mehr Output ist nicht automatisch mehr Wert
+
+Eine Beobachtung beschäftigt mich allerdings mindestens genauso.
+
+Wenn Implementierung immer günstiger wird, entsteht automatisch mehr Output. Das klingt zunächst nach einer guten Nachricht. Tatsächlich kann genau darin aber das nächste Problem liegen.
+
+Viele Unternehmen besitzen riesige Backlogs voller Ideen. Solange Entwicklung teuer war, wurden diese Ideen automatisch gefiltert. Man konnte ohnehin nur einen kleinen Teil davon umsetzen. Jetzt fällt dieser natürliche Filter langsam weg.
+
+Plötzlich können wir Features bauen, einfach weil wir es können.
+
+Aber jede zusätzliche Funktion erhöht die Komplexität eines Systems. Sie muss getestet, gewartet, dokumentiert und langfristig unterstützt werden. Wenn niemand hinterfragt, ob sie überhaupt einen echten Nutzen erzeugt, verwandelt sich Produktivität sehr schnell in Ballast.
+
+<Callout label="Priorisierung">
+  Vielleicht wird Priorisierung deshalb zur wichtigsten Disziplin der kommenden
+  Jahre. Nicht die Fähigkeit, möglichst viel Software zu entwickeln, entscheidet
+  über gute Produkte. Sondern die Fähigkeit, bewusst zu entscheiden, welche
+  Software gar nicht erst entstehen sollte.
+</Callout>
+
+## Vielleicht wird Softwareentwicklung dadurch menschlicher
+
+Je länger ich mit KI arbeite, desto weniger denke ich über Prompt Engineering oder einzelne Modelle nach. Stattdessen denke ich über Kommunikation, Verantwortung und Zusammenarbeit nach. Ich nutze KI inzwischen regelmäßig als Sparringspartner, lasse meine eigenen Gedanken hinterfragen und experimentiere deutlich häufiger mit neuen Ideen als früher. Nicht weil jede Idee gut ist, sondern weil es günstiger geworden ist, sie zu überprüfen.
+
+Vielleicht liegt genau darin die eigentliche Veränderung. KI nimmt uns das Denken nicht ab. Sie macht sichtbarer, an welchen Stellen gutes Denken schon immer entscheidend war.
+
+Je besser künstliche Intelligenz im Programmieren wird, desto wichtiger werden die Fähigkeiten, die sich nie auf Syntax reduzieren ließen: gute Fragen zu stellen, Verantwortung zu übernehmen, Wissen zu teilen und gemeinsam Entscheidungen zu treffen.
+
+Der Engpass ist nicht verschwunden.
+
+Er liegt heute nur dort, wo Softwareentwicklung schon immer am schwierigsten war – bei uns.
