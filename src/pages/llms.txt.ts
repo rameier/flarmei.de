@@ -21,7 +21,8 @@ export const GET: APIRoute = async ({ site }) => {
     '',
     '## Texte',
     ...posts.map(
-      (post) => `- [${post.data.title}](${base}/blog/${getPostSlug(post)}): ${post.data.description}`,
+      (post) =>
+        `- [${post.data.title}](${base}/blog/${getPostSlug(post)}): ${post.data.description}`,
     ),
     '',
     '## Feeds',

@@ -1,19 +1,14 @@
 ---
-import { getCollection } from "astro:content";
-import { Image } from "astro:assets";
-import EmptyWriting from "../components/EmptyWriting.astro";
-import PostRow from "../components/PostRow.astro";
-import TopicTag from "../components/TopicTag.astro";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import {
-  estimateReadMinutes,
-  formatDate,
-  getPostSlug,
-  sortPosts,
-} from "../lib/posts";
-import { websiteSchema } from "../lib/schema";
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import EmptyWriting from '../components/EmptyWriting.astro';
+import PostRow from '../components/PostRow.astro';
+import TopicTag from '../components/TopicTag.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { estimateReadMinutes, formatDate, getPostSlug, sortPosts } from '../lib/posts';
+import { websiteSchema } from '../lib/schema';
 
-const posts = sortPosts(await getCollection("blog"));
+const posts = sortPosts(await getCollection('blog'));
 const [lead, ...rest] = posts;
 ---
 
@@ -25,8 +20,8 @@ const [lead, ...rest] = posts;
   <section class="lede fade">
     <h1>Ich denke laut. Über Führung, Entwicklung und <em>die Menschen dahinter.</em></h1>
     <p>
-      Über Developer Experience, Agentic Engineering, E-Sports und die
-      Selbstreflexion, die bei allem dazwischensteht.
+      Über Developer Experience, Agentic Engineering, E-Sports und die Selbstreflexion, die bei
+      allem dazwischensteht.
     </p>
   </section>
 

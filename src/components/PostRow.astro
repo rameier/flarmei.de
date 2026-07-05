@@ -1,8 +1,8 @@
 ---
-import { Image } from "astro:assets";
-import type { BlogPost } from "../lib/posts";
-import { estimateReadMinutes, formatDate, getPostSlug } from "../lib/posts";
-import TopicTag from "./TopicTag.astro";
+import { Image } from 'astro:assets';
+import type { BlogPost } from '../lib/posts';
+import { estimateReadMinutes, formatDate, getPostSlug } from '../lib/posts';
+import TopicTag from './TopicTag.astro';
 
 interface Props {
   post: BlogPost;
@@ -13,7 +13,7 @@ const { post, prefix } = Astro.props;
 const slug = getPostSlug(post);
 ---
 
-<article class:list={["row", { "row--with-thumb": !!post.data.heroImage }]}>
+<article class:list={['row', { 'row--with-thumb': !!post.data.heroImage }]}>
   {
     post.data.heroImage && (
       <Image

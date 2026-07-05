@@ -1,0 +1,10 @@
+dist/
+.astro/
+pnpm-lock.yaml
+
+# Blog content and authoring docs are hand-formatted prose, not code.
+src/content/blog/
+templates/
+docs/
+.github/instructions/
+.github/skills/

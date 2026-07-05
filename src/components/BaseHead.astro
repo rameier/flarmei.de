@@ -55,11 +55,19 @@ const [resolvedImageWidth, resolvedImageHeight] = image ? ['1600', '900'] : ['12
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={resolvedImage} />
 <meta name="twitter:image:alt" content={resolvedImageAlt} />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap"
-  rel="stylesheet"
+  rel="preload"
+  href="/fonts/spectral/spectral-400-normal.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/ibm-plex-mono/ibm-plex-mono-400-normal.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
 />
 <link rel="alternate" type="application/rss+xml" title="flarmei.de RSS Feed" href="/rss.xml" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

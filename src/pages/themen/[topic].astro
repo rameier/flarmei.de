@@ -15,9 +15,7 @@ export function getStaticPaths() {
 }
 
 const { topic } = Astro.props as { topic: TopicKey };
-const posts = sortPosts(await getCollection('blog')).filter(
-  (post) => post.data.topic === topic,
-);
+const posts = sortPosts(await getCollection('blog')).filter((post) => post.data.topic === topic);
 const label = topics[topic].label;
 const structuredData = [
   breadcrumbSchema([
@@ -41,7 +39,9 @@ const structuredData = [
   {
     posts.length ? (
       <section class="post-list" aria-label={`Texte zu ${label}`}>
-        {posts.map((post) => <PostRow post={post} />)}
+        {posts.map((post) => (
+          <PostRow post={post} />
+        ))}
       </section>
     ) : (
       <EmptyWriting />

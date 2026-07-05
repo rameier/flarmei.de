@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Image } from 'astro:assets';
 
 interface Props {
   src: ImageMetadata;
@@ -8,12 +8,7 @@ interface Props {
   sizes?: string;
 }
 
-const {
-  src,
-  alt,
-  caption,
-  sizes = "(max-width: 860px) 100vw, 748px",
-} = Astro.props;
+const { src, alt, caption, sizes = '(max-width: 860px) 100vw, 748px' } = Astro.props;
 ---
 
 <figure class="image-with-caption">
