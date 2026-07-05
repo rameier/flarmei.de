@@ -20,7 +20,7 @@ const { layers } = Astro.props;
     {
       layers.map((layer, index) => (
         <li
-          class:list={{ "is-agent-layer": index === 0 }}
+          class:list={{ 'is-agent-layer': index === 0 }}
           style={`--layer-inset: ${Math.min(layers.length - index - 1, 5) * 1.5}rem`}
         >
           <strong>{layer.name}</strong>

@@ -2,6 +2,8 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import StructuredData from '../components/StructuredData.astro';
+import { personSchema } from '../lib/schema';
 import '../styles/global.css';
 
 interface Props {
@@ -11,15 +13,35 @@ interface Props {
   image?: string;
   imageAlt?: string;
   publishedTime?: string;
+  modifiedTime?: string;
+  structuredData?: Record<string, unknown>[];
 }
 
-const { title, description, type, image, imageAlt, publishedTime } = Astro.props;
+const {
+  title,
+  description,
+  type,
+  image,
+  imageAlt,
+  publishedTime,
+  modifiedTime,
+  structuredData = [],
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="de">
   <head>
-    <BaseHead title={title} description={description} type={type} image={image} imageAlt={imageAlt} publishedTime={publishedTime} />
+    <BaseHead
+      title={title}
+      description={description}
+      type={type}
+      image={image}
+      imageAlt={imageAlt}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
+    />
+    <StructuredData schema={[personSchema, ...structuredData]} />
   </head>
   <body>
     <div class="wrap">

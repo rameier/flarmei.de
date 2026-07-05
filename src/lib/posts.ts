@@ -3,9 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 export type BlogPost = CollectionEntry<'blog'>;
 
 export function sortPosts(posts: BlogPost[]) {
-  return [...posts].sort(
-    (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
-  );
+  return [...posts].sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 }
 
 export function formatDate(date: Date, mode: 'short' | 'long' = 'long') {

@@ -1,20 +1,15 @@
-import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders";
+import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const blog = defineCollection({
-  loader: glob({ pattern: "**/*.mdx", base: "./src/content/blog" }),
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/blog' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
       description: z.string(),
       pubDate: z.coerce.date(),
-      topic: z.enum([
-        "agentic",
-        "devex",
-        "leadership",
-        "esports",
-        "reflection",
-      ]),
+      updatedDate: z.coerce.date().optional(),
+      topic: z.enum(['agentic', 'devex', 'leadership', 'esports', 'reflection']),
       heroImage: image().optional(),
       heroImageAlt: z.string().optional(),
     }),

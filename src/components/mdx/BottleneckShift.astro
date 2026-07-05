@@ -12,8 +12,7 @@ interface Props {
 
 const { rows, caption } = Astro.props;
 
-const pinchFor = (row: Row) =>
-  ((row.bottleneckIndex + 0.5) / row.stages.length) * 100;
+const pinchFor = (row: Row) => ((row.bottleneckIndex + 0.5) / row.stages.length) * 100;
 ---
 
 <figure class="bottleneck-shift">
@@ -26,9 +25,7 @@ const pinchFor = (row: Row) =>
           <div class="pipe" style={`--pinch: ${pinchFor(row)}%`} />
           <ol class="stage-labels">
             {row.stages.map((stage, index) => (
-              <li class:list={{ "is-bottleneck": index === row.bottleneckIndex }}>
-                {stage}
-              </li>
+              <li class:list={{ 'is-bottleneck': index === row.bottleneckIndex }}>{stage}</li>
             ))}
           </ol>
         </div>
