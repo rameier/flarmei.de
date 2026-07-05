@@ -4,6 +4,7 @@ import EmptyWriting from '../../components/EmptyWriting.astro';
 import PostRow from '../../components/PostRow.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { sortPosts } from '../../lib/posts';
+import { breadcrumbSchema } from '../../lib/schema';
 import { topicOrder, topics, type TopicKey } from '../../lib/topics';
 
 export function getStaticPaths() {
@@ -18,11 +19,19 @@ const posts = sortPosts(await getCollection('blog')).filter(
   (post) => post.data.topic === topic,
 );
 const label = topics[topic].label;
+const structuredData = [
+  breadcrumbSchema([
+    { name: 'Home', url: new URL('/', Astro.site).toString() },
+    { name: 'Blog', url: new URL('/blog/', Astro.site).toString() },
+    { name: label, url: Astro.url.href },
+  ]),
+];
 ---
 
 <BaseLayout
   title={`${label} - flarmei.de`}
   description={`Texte von Ralf Meier zum Thema ${label}.`}
+  structuredData={structuredData}
 >
   <header class="page-head fade">
     <span class="micro">Thema</span>

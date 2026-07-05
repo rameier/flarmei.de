@@ -11,6 +11,7 @@ import {
   getPostSlug,
   sortPosts,
 } from "../lib/posts";
+import { websiteSchema } from "../lib/schema";
 
 const posts = sortPosts(await getCollection("blog"));
 const [lead, ...rest] = posts;
@@ -19,6 +20,7 @@ const [lead, ...rest] = posts;
 <BaseLayout
   title="flarmei.de - Ralf Meier"
   description="Persönlicher Blog von Ralf Meier über Führung, Developer Experience, Agentic Engineering, E-Sports und Selbstreflexion."
+  structuredData={[websiteSchema]}
 >
   <section class="lede fade">
     <h1>Ich denke laut. Über Führung, Entwicklung und <em>die Menschen dahinter.</em></h1>
