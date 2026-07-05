@@ -157,6 +157,27 @@ main {
   padding: 2.5rem 0 4rem;
 }
 
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.socials a {
+  color: var(--ink-faint);
+  transition: color 0.2s ease;
+}
+
+.socials a:hover {
+  color: var(--accent);
+}
+
+.socials svg {
+  display: block;
+  width: 17px;
+  height: 17px;
+}
+
 .tag {
   display: inline-flex;
   align-items: center;
@@ -1406,6 +1427,7 @@ main {
   .site-foot {
     align-items: flex-start;
     flex-direction: column;
+    gap: 1.1rem;
   }
 
   .row {

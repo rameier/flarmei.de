@@ -6,6 +6,11 @@ export const personSchema = {
   name: 'Ralf Meier',
   url: `${SITE_URL}/ueber`,
   image: `${SITE_URL}/profile.png`,
+  sameAs: [
+    'https://github.com/rameier',
+    'https://www.linkedin.com/in/ralf-meier-88555118a/',
+    'https://www.instagram.com/flarmei.de/',
+  ],
 };
 
 export const websiteSchema = {
