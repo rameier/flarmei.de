@@ -1,4 +1,4 @@
-const SITE_URL = 'https://flarmei.de';
+const SITE_URL = import.meta.env.SITE ?? 'https://flarmei.de';
 
 export const personSchema = {
   '@context': 'https://schema.org',

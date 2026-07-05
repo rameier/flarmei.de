@@ -24,7 +24,7 @@ const {
 const canonicalUrl = Astro.url.href;
 const DEFAULT_IMAGE = new URL('/social-preview.png', Astro.site).toString();
 const resolvedImage = image ?? DEFAULT_IMAGE;
-const resolvedImageAlt = imageAlt ?? 'flarmei.de';
+const resolvedImageAlt = imageAlt ?? (image ? title : 'flarmei.de');
 const resolvedImageType = resolvedImage.endsWith('.svg') ? 'image/svg+xml' : 'image/png';
 const [resolvedImageWidth, resolvedImageHeight] = image ? ['1600', '900'] : ['1200', '630'];
 ---
