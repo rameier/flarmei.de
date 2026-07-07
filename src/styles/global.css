@@ -159,6 +159,31 @@ main {
   padding: 2.5rem 0 4rem;
 }
 
+.foot-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.4rem;
+}
+
+.legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.9rem;
+}
+
+.legal-links a {
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  transition: color 0.2s ease;
+}
+
+.legal-links a:hover {
+  color: var(--accent);
+}
+
 .socials {
   display: flex;
   align-items: center;
@@ -593,6 +618,27 @@ main {
   margin: 0;
   color: var(--ink);
   font-size: 0.95rem;
+}
+
+.fact dd a {
+  color: var(--accent);
+}
+
+.fact dd a:hover {
+  text-decoration: underline;
+}
+
+.fact-link {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+}
+
+.fact-link svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 0.15rem;
 }
 
 .about-topics {

@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GithubIcon from '../components/icons/GithubIcon.astro';
+import InstagramIcon from '../components/icons/InstagramIcon.astro';
+import LinkedinIcon from '../components/icons/LinkedinIcon.astro';
+import MailIcon from '../components/icons/MailIcon.astro';
+
+const socials = [
+  { label: 'GitHub', href: 'https://github.com/rameier', Icon: GithubIcon },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ralf-meier-88555118a/', Icon: LinkedinIcon },
+  { label: 'Instagram', href: 'https://www.instagram.com/flarmei.de/', Icon: InstagramIcon },
+] as const;
+---
+
+<BaseLayout
+  title="Kontakt - flarmei.de"
+  description="Kontakt zu Ralf Meier – per E-Mail oder auf einem der sozialen Netzwerke."
+>
+  <section class="page fade">
+    <header class="page-head">
+      <span class="micro">Kontakt</span>
+      <h1>Schreib mir <em>einfach</em>.</h1>
+    </header>
+
+    <p class="lead">
+      Der einfachste Weg ist eine E-Mail. Ich antworte nicht sofort, aber ich antworte.
+    </p>
+
+    <dl class="facts">
+      <div class="fact">
+        <dt>E-Mail</dt>
+        <dd>
+          <a class="fact-link" href="mailto:info@flarmei.de">
+            <MailIcon />
+            info@flarmei.de
+          </a>
+        </dd>
+      </div>
+      {
+        socials.map(({ label, href, Icon }) => (
+          <div class="fact">
+            <dt>{label}</dt>
+            <dd>
+              <a class="fact-link" href={href} target="_blank" rel="noopener noreferrer">
+                <Icon />
+                {href.replace('https://', '')}
+              </a>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+</BaseLayout>
