@@ -75,7 +75,7 @@ const socials = [
   </section>
 </BaseLayout>
 
-<script>
+<script lang="ts">
   const startedAt = document.querySelector<HTMLInputElement>('[data-started-at]');
   if (startedAt) {
     startedAt.value = String(Math.floor(Date.now() / 1000));

@@ -60,6 +60,9 @@ function origin_is_allowed(array $config): bool
         }
 
         $parts = parse_url($referer);
+        if ($parts === false) {
+            return false;
+        }
         $scheme = isset($parts['scheme']) ? (string) $parts['scheme'] : '';
         $host = isset($parts['host']) ? (string) $parts['host'] : '';
         $origin = $scheme !== '' && $host !== '' ? $scheme . '://' . $host : '';
