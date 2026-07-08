@@ -2,12 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const socials = [
-  { label: 'GitHub', href: 'https://github.com/rameier'},
+  { label: 'GitHub', href: 'https://github.com/rameier' },
   {
     label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/ralf-meier-88555118a/',
   },
-  { label: 'Instagram', href: 'https://www.instagram.com/flarmei.de/'},
+  { label: 'Instagram', href: 'https://www.instagram.com/flarmei.de/' },
 ] as const;
 ---
 
@@ -72,25 +72,25 @@ const socials = [
         ))
       }
     </dl>
+
+    <script>
+      const startedAt = document.querySelector('[data-started-at]');
+      if (startedAt instanceof HTMLInputElement) {
+        startedAt.value = String(Math.floor(Date.now() / 1000));
+      }
+
+      const status = document.querySelector('[data-contact-status]');
+      const params = new URLSearchParams(window.location.search);
+
+      if (status instanceof HTMLElement && params.has('sent')) {
+        status.hidden = false;
+        status.dataset.state = 'success';
+        status.textContent = 'Danke, deine Nachricht ist unterwegs.';
+      } else if (status instanceof HTMLElement && params.has('error')) {
+        status.hidden = false;
+        status.dataset.state = 'error';
+        status.textContent = 'Das hat gerade nicht geklappt. Bitte versuch es gleich noch einmal.';
+      }
+    </script>
   </section>
 </BaseLayout>
-
-<script lang="ts">
-  const startedAt = document.querySelector<HTMLInputElement>('[data-started-at]');
-  if (startedAt) {
-    startedAt.value = String(Math.floor(Date.now() / 1000));
-  }
-
-  const status = document.querySelector<HTMLElement>('[data-contact-status]');
-  const params = new URLSearchParams(window.location.search);
-
-  if (status && params.has('sent')) {
-    status.hidden = false;
-    status.dataset.state = 'success';
-    status.textContent = 'Danke, deine Nachricht ist unterwegs.';
-  } else if (status && params.has('error')) {
-    status.hidden = false;
-    status.dataset.state = 'error';
-    status.textContent = 'Das hat gerade nicht geklappt. Bitte versuch es gleich noch einmal.';
-  }
-</script>
