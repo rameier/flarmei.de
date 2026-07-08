@@ -1,13 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import GithubIcon from '../components/icons/GithubIcon.astro';
+import GitHubIcon from '../components/icons/GithubIcon.astro';
 import InstagramIcon from '../components/icons/InstagramIcon.astro';
 import LinkedinIcon from '../components/icons/LinkedinIcon.astro';
-import MailIcon from '../components/icons/MailIcon.astro';
 
 const socials = [
-  { label: 'GitHub', href: 'https://github.com/rameier', Icon: GithubIcon },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ralf-meier-88555118a/', Icon: LinkedinIcon },
+  { label: 'GitHub', href: 'https://github.com/rameier', Icon: GitHubIcon },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/ralf-meier-88555118a/',
+    Icon: LinkedinIcon,
+  },
   { label: 'Instagram', href: 'https://www.instagram.com/flarmei.de/', Icon: InstagramIcon },
 ] as const;
 ---
@@ -26,23 +29,47 @@ const socials = [
       Der einfachste Weg ist eine E-Mail. Ich antworte nicht sofort, aber ich antworte.
     </p>
 
-    <dl class="facts">
-      <div class="fact">
-        <dt>E-Mail</dt>
-        <dd>
-          <a class="fact-link" href="mailto:info@flarmei.de">
-            <MailIcon />
-            info@flarmei.de
-          </a>
-        </dd>
+    <form class="contact-form" method="post" action="https://kontakt.flarmei.de/contact.php">
+      <p class="contact-status" data-contact-status hidden></p>
+
+      <div class="form-row">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" autocomplete="name" required />
       </div>
+
+      <div class="form-row">
+        <label for="email">E-Mail</label>
+        <input id="email" name="email" type="email" autocomplete="email" required />
+      </div>
+
+      <div class="form-row">
+        <label for="message">Nachricht</label>
+        <textarea id="message" name="message" rows="7" required></textarea>
+      </div>
+
+      <div class="contact-trap" aria-hidden="true">
+        <label for="website">Website</label>
+        <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <input data-started-at name="started_at" type="hidden" value="" />
+
+      <p class="form-note">
+        Mit dem Absenden verarbeite ich deine Angaben zur Bearbeitung deiner Anfrage. Weitere
+        Informationen findest du in der <a href="/datenschutz">Datenschutzerklärung</a>.
+      </p>
+
+      <button class="contact-submit" type="submit">Senden</button>
+    </form>
+
+    <dl class="facts">
       {
         socials.map(({ label, href, Icon }) => (
           <div class="fact">
             <dt>{label}</dt>
             <dd>
               <a class="fact-link" href={href} target="_blank" rel="noopener noreferrer">
-                <Icon />
+                <Icon/>
                 {href.replace('https://', '')}
               </a>
             </dd>
@@ -50,5 +77,25 @@ const socials = [
         ))
       }
     </dl>
+
+    <script>
+      const startedAt = document.querySelector('[data-started-at]');
+      if (startedAt instanceof HTMLInputElement) {
+        startedAt.value = String(Math.floor(Date.now() / 1000));
+      }
+
+      const status = document.querySelector('[data-contact-status]');
+      const params = new URLSearchParams(window.location.search);
+
+      if (status instanceof HTMLElement && params.has('sent')) {
+        status.hidden = false;
+        status.dataset.state = 'success';
+        status.textContent = 'Danke, deine Nachricht ist unterwegs.';
+      } else if (status instanceof HTMLElement && params.has('error')) {
+        status.hidden = false;
+        status.dataset.state = 'error';
+        status.textContent = 'Das hat gerade nicht geklappt. Bitte versuch es gleich noch einmal.';
+      }
+    </script>
   </section>
 </BaseLayout>
