@@ -4,5 +4,6 @@ build/
 target/
 .env
 .astro/
+/backend/config.php
 
 *.local.json
