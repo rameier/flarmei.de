@@ -9,7 +9,6 @@ export const personSchema = {
   sameAs: [
     'https://github.com/rameier',
     'https://www.linkedin.com/in/ralf-meier-88555118a/',
-    'https://www.instagram.com/flarmei.de/',
   ],
 };
 
