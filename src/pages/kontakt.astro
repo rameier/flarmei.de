@@ -1,13 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import GitHubIcon from '../components/icons/GithubIcon.astro';
+import InstagramIcon from '../components/icons/InstagramIcon.astro';
+import LinkedinIcon from '../components/icons/LinkedinIcon.astro';
 
 const socials = [
-  { label: 'GitHub', href: 'https://github.com/rameier' },
+  { label: 'GitHub', href: 'https://github.com/rameier', Icon: GitHubIcon },
   {
     label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/ralf-meier-88555118a/',
+    Icon: LinkedinIcon,
   },
-  { label: 'Instagram', href: 'https://www.instagram.com/flarmei.de/' },
+  { label: 'Instagram', href: 'https://www.instagram.com/flarmei.de/', Icon: InstagramIcon },
 ] as const;
 ---
 
@@ -60,11 +64,12 @@ const socials = [
 
     <dl class="facts">
       {
-        socials.map(({ label, href }) => (
+        socials.map(({ label, href, Icon }) => (
           <div class="fact">
             <dt>{label}</dt>
             <dd>
               <a class="fact-link" href={href} target="_blank" rel="noopener noreferrer">
+                <Icon/>
                 {href.replace('https://', '')}
               </a>
             </dd>
