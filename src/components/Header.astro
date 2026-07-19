@@ -3,8 +3,8 @@ const currentPath = Astro.url.pathname;
 
 const links = [
   { href: '/', label: 'schreiben', match: ['/', '/blog', '/themen'] },
-  { href: '/ueber', label: 'über', match: ['/ueber'] },
-  { href: '/now', label: 'now', match: ['/now'] },
+  { href: '/ueber/', label: 'über', match: ['/ueber'] },
+  { href: '/now/', label: 'now', match: ['/now'] },
 ];
 
 function isActive(link: (typeof links)[number]) {

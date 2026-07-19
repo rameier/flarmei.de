@@ -4,5 +4,6 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://flarmei.de',
+  trailingSlash: 'always',
   integrations: [mdx(), sitemap()],
 });

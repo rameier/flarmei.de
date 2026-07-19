@@ -34,13 +34,13 @@ const [lead, ...rest] = posts;
             <div class="featured-main">
               <TopicTag topic={lead.data.topic} />
               <h2>
-                <a href={`/blog/${getPostSlug(lead)}`}>{lead.data.title}</a>
+                <a href={`/blog/${getPostSlug(lead)}/`}>{lead.data.title}</a>
               </h2>
               <p class="fdek">{lead.data.description}</p>
               <div class="fmeta">
                 <span class="micro">{formatDate(lead.data.pubDate)}</span>
                 <span class="rread mono">{estimateReadMinutes(lead)} min</span>
-                <a class="mono read-link" href={`/blog/${getPostSlug(lead)}`}>
+                <a class="mono read-link" href={`/blog/${getPostSlug(lead)}/`}>
                   Lesen -&gt;
                 </a>
               </div>
@@ -49,7 +49,7 @@ const [lead, ...rest] = posts;
             {lead.data.heroImage && (
               <a
                 class="featured-thumb"
-                href={`/blog/${getPostSlug(lead)}`}
+                href={`/blog/${getPostSlug(lead)}/`}
                 aria-label={lead.data.title}
               >
                 <Image
