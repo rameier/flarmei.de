@@ -4,7 +4,7 @@ export const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Ralf Meier',
-  url: `${SITE_URL}/ueber`,
+  url: `${SITE_URL}/ueber/`,
   image: `${SITE_URL}/profile.png`,
   sameAs: [
     'https://github.com/rameier',
@@ -40,7 +40,7 @@ export function blogPostingSchema(opts: {
     image: opts.image,
     datePublished: opts.pubDate.toISOString(),
     dateModified: (opts.updatedDate ?? opts.pubDate).toISOString(),
-    author: { '@type': 'Person', name: 'Ralf Meier', url: `${SITE_URL}/ueber` },
+    author: { '@type': 'Person', name: 'Ralf Meier', url: `${SITE_URL}/ueber/` },
     publisher: { '@type': 'Person', name: 'Ralf Meier' },
     inLanguage: 'de-DE',
   };
