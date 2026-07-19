@@ -1,0 +1,63 @@
+---
+interface Props {
+  source?: string;
+  accountable?: string;
+  responsible?: string;
+  outcome?: string;
+}
+
+const {
+  source = 'Ich erhalte einen Auftrag',
+  accountable = 'Ich bleibe für das Ergebnis accountable',
+  responsible = 'Eine andere Person übernimmt einen Teil der Responsibility',
+  outcome = 'Das vereinbarte Ergebnis',
+} = Astro.props;
+---
+
+<figure class="responsibility-flow">
+  <figcaption>
+    <span class="diagram-label">Verantwortung bei Delegation</span>
+    <strong>Responsibility kann ich delegieren. Accountability bleibt bei mir.</strong>
+  </figcaption>
+
+  <div class="responsibility-map">
+    <div class="flow-node flow-source">
+      <span class="node-kicker">Auftrag</span>
+      <strong>{source}</strong>
+    </div>
+
+    <div class="flow-line accountability-line accountability-line--first" aria-hidden="true">
+      <span>Accountability</span>
+    </div>
+
+    <div class="flow-node flow-accountable">
+      <span class="node-kicker">Accountable</span>
+      <strong>{accountable}</strong>
+    </div>
+
+    <div class="delegation-line" aria-hidden="true">
+      <span>delegiert</span>
+    </div>
+
+    <div class="flow-node flow-responsible">
+      <span class="node-kicker">Responsible</span>
+      <strong>{responsible}</strong>
+      <small>Umsetzung und konkrete Entscheidungen</small>
+    </div>
+
+    <div class="flow-line accountability-line accountability-line--second" aria-hidden="true"></div>
+    <div class="flow-line contribution-line" aria-hidden="true">
+      <span>trägt bei</span>
+    </div>
+
+    <div class="flow-node flow-outcome">
+      <span class="node-kicker">Ergebnis</span>
+      <strong>{outcome}</strong>
+    </div>
+  </div>
+
+  <p>
+    Die Arbeit kann bei einer anderen Person liegen. Für das Ergebnis stehe ich gegenüber meiner
+    Auftraggeberin oder meinem Auftraggeber trotzdem weiter ein.
+  </p>
+</figure>
