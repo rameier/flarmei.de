@@ -19,7 +19,7 @@ const posts = sortPosts(await getCollection('blog'));
   </header>
 
   <nav class="topic-nav" aria-label="Themen">
-    {topicOrder.map((key) => <a href={`/themen/${key}`}>{topics[key].label}</a>)}
+    {topicOrder.map((key) => <a href={`/themen/${key}/`}>{topics[key].label}</a>)}
   </nav>
 
   {
