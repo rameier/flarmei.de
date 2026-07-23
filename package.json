@@ -27,7 +27,7 @@
     "eslint-plugin-astro": "^2.1.1",
     "prettier": "^3.9.4",
     "prettier-plugin-astro": "^0.14.1",
-    "sharp": "^0.34.5",
+    "sharp": "^0.35.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.62.1"
   }
